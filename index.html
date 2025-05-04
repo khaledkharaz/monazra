@@ -965,6 +965,66 @@
         body.dark-mode #cancel-form-button:hover {
             background-color: #495057;
         }
+
+        /* Basic styling for the container */
+        .api-key-container {
+            margin: 15px 0;
+            /* Add padding, border, etc. if needed */
+        }
+
+        /* Style for the trigger icon */
+        .api-key-trigger {
+            cursor: pointer;
+            /* Indicates it's clickable */
+            display: inline-block;
+            /* Allows margin/padding */
+            margin-bottom: 10px;
+            /* Space between icon and section */
+            font-size: 1.5em;
+            /* Make the icon a bit larger */
+            /* Add any other desired icon styles */
+        }
+
+        /* Style for the collapsible section */
+        .api-key-section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            /* Initial state is handled by the 'hidden' class below */
+        }
+
+        /* Style for the input field */
+        .api-key-section input[type="text"] {
+            width: calc(100% - 22px);
+            /* Adjust width considering padding/border */
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            /* Include padding and border in the element's total width and height */
+        }
+
+        /* Style for the save button */
+        .api-key-section button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .api-key-section button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Class to hide the section (used by JavaScript) */
+        .api-key-section.hidden {
+            display: none;
+        }
     </style>
 </head>
 
@@ -975,7 +1035,26 @@
         <button id="dark-mode-toggle" class="icon-button theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
             <span class="sun-icon">☀️</span>
             <span class="moon-icon">🌙</span>
+            <!-- Container for the API Key input component -->
+            <div class="api-key-container">
+
+                <!-- Icon/Emoji Trigger -->
+                <!-- You can replace ⚙️ with any icon font class (like Font Awesome) or image -->
+                <span id="api-key-trigger" class="api-key-trigger" title="Add/Manage API Key">
+                    ⚙️ <!-- Example: Gear emoji -->
+                </span>
+
+                
+
+            </div>
         </button>
+        <!-- Collapsible Section for API Key Input -->
+        <div id="api-key-section" class="api-key-section hidden">
+            <h4>Add or Update Your API Key</h4>
+            <p>Enter your API key below. It will be saved in your browser's cookies.</p>
+            <input type="text" id="api-key-input" placeholder="Enter your API key here">
+            <button id="save-api-key-button">Save Key</button>
+        </div>
     </div>
 
     <!-- Main App Content Wrapper -->
@@ -1001,39 +1080,42 @@
                         value="religion-christianity"><label for="filter-religion-christianity" role="option">الدين:
                         المسيحية</label>
                     <input type="checkbox" id="filter-religion-judaism" name="representative-filter"
-                        value="religion-judaism"><label for="filter-religion-judaism" role="option">الدين: اليهودية</label>
+                        value="religion-judaism"><label for="filter-religion-judaism" role="option">الدين:
+                        اليهودية</label>
                     <input type="checkbox" id="filter-religion-buddhism" name="representative-filter"
-                        value="religion-buddhism"><label for="filter-religion-buddhism" role="option">الدين: البوذية</label>
+                        value="religion-buddhism"><label for="filter-religion-buddhism" role="option">الدين:
+                        البوذية</label>
                     <input type="checkbox" id="filter-religion-hinduism" name="representative-filter"
-                        value="religion-hinduism"><label for="filter-religion-hinduism" role="option">الدين: الهندوسية</label>
+                        value="religion-hinduism"><label for="filter-religion-hinduism" role="option">الدين:
+                        الهندوسية</label>
 
 
                     <input type="checkbox" id="filter-sect-sunni" name="representative-filter" value="sect-sunni"><label
                         for="filter-sect-sunni" role="option">المذهب: سني</label>
                     <input type="checkbox" id="filter-sect-shia" name="representative-filter" value="sect-shia"><label
                         for="filter-sect-shia" role="option">المذهب: شيعي</label>
-                     <input type="checkbox" id="filter-sect-ibadi" name="representative-filter" value="sect-ibadi"><label
+                    <input type="checkbox" id="filter-sect-ibadi" name="representative-filter" value="sect-ibadi"><label
                         for="filter-sect-ibadi" role="option">المذهب: إباضي</label>
 
                     <input type="checkbox" id="filter-denomination-orthodox" name="representative-filter"
-                        value="denomination-orthodox"><label for="filter-denomination-orthodox"
-                        role="option">طائفة: أرثوذكسية</label>
+                        value="denomination-orthodox"><label for="filter-denomination-orthodox" role="option">طائفة:
+                        أرثوذكسية</label>
                     <input type="checkbox" id="filter-denomination-catholic" name="representative-filter"
-                        value="denomination-catholic"><label for="filter-denomination-catholic"
-                        role="option">طائفة: كاثوليكية</label>
+                        value="denomination-catholic"><label for="filter-denomination-catholic" role="option">طائفة:
+                        كاثوليكية</label>
                     <input type="checkbox" id="filter-denomination-protestant" name="representative-filter"
-                        value="denomination-protestant"><label for="filter-denomination-protestant"
-                        role="option">طائفة: بروتستانتية</label>
+                        value="denomination-protestant"><label for="filter-denomination-protestant" role="option">طائفة:
+                        بروتستانتية</label>
 
                     <input type="checkbox" id="filter-philosophical-atheism" name="representative-filter"
-                        value="philosophical-atheism"><label for="filter-philosophical-atheism"
-                        role="option">فلسفي: إلحاد</label>
+                        value="philosophical-atheism"><label for="filter-philosophical-atheism" role="option">فلسفي:
+                        إلحاد</label>
                     <input type="checkbox" id="filter-philosophical-agnosticism" name="representative-filter"
                         value="philosophical-agnosticism"><label for="filter-philosophical-agnosticism"
                         role="option">فلسفي: لاأدرية</label>
-                     <input type="checkbox" id="filter-movement-humanism" name="representative-filter"
-                        value="movement-humanism"><label for="filter-movement-humanism"
-                        role="option">حركة: إنسانية</label>
+                    <input type="checkbox" id="filter-movement-humanism" name="representative-filter"
+                        value="movement-humanism"><label for="filter-movement-humanism" role="option">حركة:
+                        إنسانية</label>
 
 
                     <input type="checkbox" id="filter-movement-sufism" name="representative-filter"
@@ -1043,13 +1125,15 @@
                     <input type="checkbox" id="filter-school-fiqh" name="representative-filter"
                         value="school-fiqh"><label for="filter-school-fiqh" role="option">مدرسة: فقه</label>
                     <input type="checkbox" id="filter-movement-quranist" name="representative-filter"
-                        value="movement-quranist"><label for="filter-movement-quranist" role="option">حركة: قرآنيون</label>
+                        value="movement-quranist"><label for="filter-movement-quranist" role="option">حركة:
+                        قرآنيون</label>
 
                 </div>
                 <input type="text" id="representative-search" placeholder="ابحث عن ممثلين..."
                     aria-label="البحث عن ممثلين" autocomplete="off"> <!-- Updated placeholder/label -->
                 <!-- Button to go to Representative Management -->
-                <button id="manage-representatives-button" aria-label="إدارة الممثلين">إدارة الممثلين</button> <!-- Updated Text/Label -->
+                <button id="manage-representatives-button" aria-label="إدارة الممثلين">إدارة الممثلين</button>
+                <!-- Updated Text/Label -->
             </div>
 
             <div id="representative-grid" role="listbox" aria-label="اختر ممثلاً"> <!-- Updated Label -->
@@ -1074,8 +1158,8 @@
             <div id="chat-input-area">
                 <label for="user-input" class="visually-hidden">أدخل سؤالك أو تعليقك</label>
                 <!-- Updated Label -->
-                <textarea id="user-input" placeholder="اسأل عن معتقداتهم..." rows="1" disabled
-                    aria-disabled="true" autocomplete="off"></textarea> <!-- Updated Placeholder -->
+                <textarea id="user-input" placeholder="اسأل عن معتقداتهم..." rows="1" disabled aria-disabled="true"
+                    autocomplete="off"></textarea> <!-- Updated Placeholder -->
                 <button id="send-button" disabled aria-disabled="true">إرسال</button>
             </div>
         </div>
@@ -1085,7 +1169,8 @@
         <div id="representative-management" class="view hidden" aria-hidden="true">
             <h2>إدارة الممثلين</h2> <!-- Updated Heading -->
             <div class="controls">
-                <button id="add-representative-button" aria-label="إضافة ممثل جديد">إضافة ممثل جديد</button> <!-- Updated Text/Label -->
+                <button id="add-representative-button" aria-label="إضافة ممثل جديد">إضافة ممثل جديد</button>
+                <!-- Updated Text/Label -->
                 <button id="back-from-management-button" aria-label="العودة للممثلين">عودة</button>
                 <!-- Updated Text/Label -->
             </div>
@@ -1109,20 +1194,23 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="form-representative-instruction">التعليمات (حدد كيف يشرحون معتقداتهم ورؤيتهم للعالم):</label> <!-- Updated Label -->
+                            <label for="form-representative-instruction">التعليمات (حدد كيف يشرحون معتقداتهم ورؤيتهم
+                                للعالم):</label> <!-- Updated Label -->
                             <textarea id="form-representative-instruction" rows="5" required
                                 autocomplete="off"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="form-representative-types">الأنواع (مفصولة بفاصلة، مثال: religion-islam, sect-sunni, philosophical-atheism):</label> <!-- Updated Label -->
+                            <label for="form-representative-types">الأنواع (مفصولة بفاصلة، مثال: religion-islam,
+                                sect-sunni, philosophical-atheism):</label> <!-- Updated Label -->
                             <input type="text" id="form-representative-types"
                                 placeholder="مثال: religion-islam, sect-sunni" autocomplete="off">
                             <!-- Updated Placeholder -->
                         </div>
 
                         <div class="form-group">
-                            <label for="form-representative-categories">الفئات (مفصولة بفاصلة، مثال: school-ashari, movement-sufism, denomination-orthodox):</label> <!-- Updated Label -->
+                            <label for="form-representative-categories">الفئات (مفصولة بفاصلة، مثال: school-ashari,
+                                movement-sufism, denomination-orthodox):</label> <!-- Updated Label -->
                             <input type="text" id="form-representative-categories"
                                 placeholder="مثال: school-ashari, denomination-catholic" autocomplete="off">
                             <!-- Updated Placeholder -->
@@ -1157,6 +1245,97 @@
             // --- API Configuration ---
             const GOOGLE_API_KEY = 'AIzaSyDFTC32n3d0HcLWcuq4h91pyLydCLK24sQ'; // <--- REPLACE WITH YOUR ACTUAL KEY
             const API_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'; // Using a potentially faster model
+
+
+            const apiKeyTrigger = document.getElementById('api-key-trigger');
+            const apiKeySection = document.getElementById('api-key-section');
+            const apiKeyInput = document.getElementById('api-key-input');
+            const saveApiKeyButton = document.getElementById('save-api-key-button');
+
+            // --- Cookie Handling Functions ---
+            // Simple functions to get and set cookies
+
+            function setCookie(name, value, days) {
+                let expires = "";
+                if (days) {
+                    const date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            }
+
+            function getCookie(name) {
+                const nameEQ = name + "=";
+                const ca = document.cookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
+
+            // --- Component Logic ---
+
+            // 1. Load API key from cookie when the page loads (optional - good for showing existing key)
+            //    NOTE: The section is hidden initially. The key is loaded into the INPUT
+            //    when the section is opened (see trigger click handler).
+
+            // 2. Toggle section visibility when the trigger icon is clicked
+            apiKeyTrigger.addEventListener('click', () => {
+                const isHidden = apiKeySection.classList.contains('hidden');
+
+                if (isHidden) {
+                    // If currently hidden, show it
+                    apiKeySection.classList.remove('hidden');
+                    // When showing, load the current key from cookie into the input field
+                    const currentKey = getCookie('userApiKey'); // Use a consistent cookie name
+                    if (currentKey) {
+                        apiKeyInput.value = currentKey;
+                    } else {
+                        // Clear input if no key exists in cookie
+                        apiKeyInput.value = '';
+                    }
+                } else {
+                    // If currently visible, hide it
+                    apiKeySection.classList.add('hidden');
+                    // Optional: Clear the input field when hiding for privacy
+                    // apiKeyInput.value = '';
+                }
+            });
+
+            // 3. Save API key to cookie when the Save button is clicked
+            saveApiKeyButton.addEventListener('click', () => {
+                const apiKey = apiKeyInput.value.trim(); // Get value and remove whitespace
+
+                if (apiKey) {
+                    // Save the key to a cookie named 'userApiKey' for 30 days
+                    setCookie('userApiKey', apiKey, 30);
+                    console.log('API Key saved.');
+                    // You might want to add a visual confirmation to the user
+                } else {
+                    // If input is empty, remove the cookie
+                    setCookie('userApiKey', '', -1); // Setting expiry to -1 effectively deletes the cookie
+                    console.log('API Key cleared.');
+                    // Optional: Add a confirmation message
+                }
+
+                // Close the section after saving/clearing
+                apiKeySection.classList.add('hidden');
+
+                // Optional: Clear the input field after saving/clearing
+                // apiKeyInput.value = '';
+            });
+
+            // --- Function to retrieve the saved API key from anywhere in your app ---
+            // You will call this function whenever you need the API key for your API calls.
+            window.getSavedApiKey = () => {
+                return getCookie('userApiKey');
+            };
+
+
+
 
             // Global instruction for the AI's role (Explanation focused, with Debate on challenge - in Arabic)
             const GLOBAL_INSTRUCTION = `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح نظام معتقدات، دين، طائفة، أو موقف فلسفي محدد لمستخدم يطرح أسئلة حوله.
@@ -1203,7 +1382,7 @@
                 // Add other state properties here as needed...
             };
 
-             // --- representativeData.js (New Data Structure - Translated) ---
+            // --- representativeData.js (New Data Structure - Translated) ---
             // Note: Instructions are crucial here to define the AI's explanatory role within safety constraints.
             // The 'key', 'types', and 'categories' values are kept in English for consistency in code logic/filtering.
             const defaultRepresentatives = [
@@ -1305,7 +1484,7 @@
                     categories: [],
                     instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المعتقدات والممارسات الأساسية للإسلام الإباضي، وهو فرع متميز من الإسلام يختلف عن السنة والشيعة. ركز على آرائهم اللاهوتية الفريدة (مثل رؤية الله، خلق القرآن) ومنهجيتهم القانونية. اشرح المفاهيم بوضوح واحترام. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر أو الطوائف الأخرى. ركز على توضيح التعاليم الإسلامية الإباضية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الإسلام الإباضي، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
-                 {
+                {
                     key: 'representative-islam-sufism', // Already included, refined instruction
                     name: 'ممثل عن الصوفية',
                     types: ['religion-islam', 'movement-sufism'],
@@ -1355,13 +1534,13 @@
 
 
                 // --- Other Belief Systems ---
-                 {
-                     key: 'representative-druze', // Keep with caution as discussed
-                     name: 'ممثل عن العقيدة الدرزية (الجوانب العامة)',
-                     types: ['religion-druze'],
-                     categories: ['public-aspects-only'], // Tag emphasizing the limitation
-                     instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح الجوانب العامة والمعروفة على نطاق واسع من العقيدة الدرزية، مع التركيز على التاريخ والأخلاق والممارسات الاجتماعية ومبدأ التوحيد. كن على دراية بأن العديد من الجوانب الأعمق للمعتقدات الدرزية باطنية ولا يتم مشاركتها مع الغرباء. يجب عليك **ألا** تحاول شرح المعتقدات الباطنية أو الطقوس أو التفسيرات المحددة للنصوص المقدسة التي هي مخصصة للمبادرين (العقّال). استجب بناءً على المعلومات الأكاديمية المتاحة على نطاق واسع أو المعلومات المتاحة للجمهور فقط حول المجتمع الدرزي وتاريخه، وليس العقيدة الداخلية. كن محترمًا والتزم بمبدأ الكتمان (التقية) عند الضرورة عن طريق الرفض بلباقة لمناقشة الموضوعات الباطنية. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر الأخرى. ركز على توضيح الجوانب المعروفة علنًا من العقيدة الدرزية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الجوانب العامة للعقيدة الدرزية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
-                 },
+                {
+                    key: 'representative-druze', // Keep with caution as discussed
+                    name: 'ممثل عن العقيدة الدرزية (الجوانب العامة)',
+                    types: ['religion-druze'],
+                    categories: ['public-aspects-only'], // Tag emphasizing the limitation
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح الجوانب العامة والمعروفة على نطاق واسع من العقيدة الدرزية، مع التركيز على التاريخ والأخلاق والممارسات الاجتماعية ومبدأ التوحيد. كن على دراية بأن العديد من الجوانب الأعمق للمعتقدات الدرزية باطنية ولا يتم مشاركتها مع الغرباء. يجب عليك **ألا** تحاول شرح المعتقدات الباطنية أو الطقوس أو التفسيرات المحددة للنصوص المقدسة التي هي مخصصة للمبادرين (العقّال). استجب بناءً على المعلومات الأكاديمية المتاحة على نطاق واسع أو المعلومات المتاحة للجمهور فقط حول المجتمع الدرزي وتاريخه، وليس العقيدة الداخلية. كن محترمًا والتزم بمبدأ الكتمان (التقية) عند الضرورة عن طريق الرفض بلباقة لمناقشة الموضوعات الباطنية. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر الأخرى. ركز على توضيح الجوانب المعروفة علنًا من العقيدة الدرزية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الجوانب العامة للعقيدة الدرزية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
+                },
                 {
                     key: 'representative-judaism-general',
                     name: 'ممثل عن اليهودية (عام)',
@@ -1646,7 +1825,7 @@
                 card.classList.add('representative-card'); // Updated class name
                 card.dataset.key = representative.key;
 
-                 const allTags = [...(representative.types || []), ...(representative.categories || [])];
+                const allTags = [...(representative.types || []), ...(representative.categories || [])];
                 // Display tags nicely (e.g., "Religion: Islam", "Sect: Sunni") - Translate Prefixes
                 const tagTranslations = {
                     'religion': 'الدين',
@@ -1670,10 +1849,10 @@
                     let translatedTag = tag; // Default to original tag
 
                     if (parts.length > 1) {
-                         const prefix = parts[0].toLowerCase();
-                         const valueParts = parts.slice(1).map(part => {
-                              // Attempt to translate common values or keep as is
-                              const commonValueTranslations = {
+                        const prefix = parts[0].toLowerCase();
+                        const valueParts = parts.slice(1).map(part => {
+                            // Attempt to translate common values or keep as is
+                            const commonValueTranslations = {
                                 'islam': 'الإسلام',
                                 'christianity': 'المسيحية',
                                 'judaism': 'اليهودية',
@@ -1705,19 +1884,19 @@
                                 'aspects': tagTranslations['aspects'],
                                 'only': tagTranslations['only'],
                                 'general': tagTranslations['general'],
-                              };
-                              return commonValueTranslations[part] || part.charAt(0).toUpperCase() + part.slice(1); // Capitalize if not translated
-                         });
+                            };
+                            return commonValueTranslations[part] || part.charAt(0).toUpperCase() + part.slice(1); // Capitalize if not translated
+                        });
 
-                         const translatedPrefix = tagTranslations[prefix] || prefix.charAt(0).toUpperCase() + prefix.slice(1); // Capitalize if not translated
-                         translatedTag = `${translatedPrefix}: ${valueParts.join(' ')}`;
+                        const translatedPrefix = tagTranslations[prefix] || prefix.charAt(0).toUpperCase() + prefix.slice(1); // Capitalize if not translated
+                        translatedTag = `${translatedPrefix}: ${valueParts.join(' ')}`;
 
                     } else {
-                         // Handle tags without prefix, e.g., 'general'
-                         translatedTag = tagTranslations[tag] || tag.charAt(0).toUpperCase() + tag.slice(1); // Capitalize if not translated
+                        // Handle tags without prefix, e.g., 'general'
+                        translatedTag = tagTranslations[tag] || tag.charAt(0).toUpperCase() + tag.slice(1); // Capitalize if not translated
                     }
 
-                     return `<span class="tag">${translatedTag}</span>`;
+                    return `<span class="tag">${translatedTag}</span>`;
 
                 }).join('');
 
@@ -1778,7 +1957,7 @@
                     'stance': 'موقف',
                     'movement': 'حركة',
                     'school': 'مدرسة',
-                     'theology': 'عقيدة',
+                    'theology': 'عقيدة',
                     'fiqh': 'فقه',
                     'historical': 'تاريخي',
                     'public': 'عامة',
@@ -1787,7 +1966,7 @@
                     'general': 'عام',
                 };
 
-                 const commonValueTranslations = {
+                const commonValueTranslations = {
                     'islam': 'الإسلام',
                     'christianity': 'المسيحية',
                     'judaism': 'اليهودية',
@@ -1815,7 +1994,7 @@
                     'jafari': 'جعفرية', // Corrected from Jafari to الجعفرية (Fiqh)
                     'zaydi': 'زيدية', // Corrected from Zaydi to الزيدية (Shia sect)
                     // Add more specific translations if needed
-                 };
+                };
 
 
                 const formatTags = (tagArray) => {
@@ -1824,10 +2003,10 @@
                         if (parts.length > 1) {
                             const prefix = parts[0].toLowerCase();
                             const valueParts = parts.slice(1).map(part => commonValueTranslations[part] || part.charAt(0).toUpperCase() + part.slice(1));
-                             const translatedPrefix = tagTranslations[prefix] || prefix.charAt(0).toUpperCase() + prefix.slice(1);
-                             return `${translatedPrefix}: ${valueParts.join(' ')}`;
+                            const translatedPrefix = tagTranslations[prefix] || prefix.charAt(0).toUpperCase() + prefix.slice(1);
+                            return `${translatedPrefix}: ${valueParts.join(' ')}`;
                         }
-                         return tagTranslations[t] || commonValueTranslations[t] || t.trim().replace(/\b\w/g, l => l.toUpperCase());
+                        return tagTranslations[t] || commonValueTranslations[t] || t.trim().replace(/\b\w/g, l => l.toUpperCase());
                     }).filter(t => t.length > 0).join(', ');
                 };
 
@@ -2034,12 +2213,12 @@
             };
 
             const handleFilterChange = (event) => {
-                 if (appState.currentState !== 'representative-selection') {
+                if (appState.currentState !== 'representative-selection') {
                     console.warn("Attempted to change filters while not on representative selection view.");
-                     if (event.target && event.target.type === 'checkbox') {
-                         // Revert checkbox state if click occurred in the wrong view
-                         event.target.checked = !event.target.checked;
-                     }
+                    if (event.target && event.target.type === 'checkbox') {
+                        // Revert checkbox state if click occurred in the wrong view
+                        event.target.checked = !event.target.checked;
+                    }
                     return;
                 }
 
@@ -2066,35 +2245,35 @@
                             }
                         } else {
                             // If 'all' is unchecked, and it's the only filter, keep it checked
-                             if (appState.selectedFilters.length === 1 && appState.selectedFilters.includes('all')) {
+                            if (appState.selectedFilters.length === 1 && appState.selectedFilters.includes('all')) {
                                 // Do nothing, keep 'all' checked
                                 if (event.target) event.target.checked = true; // Revert the click
                                 announce('لا يمكنك إلغاء تحديد "الكل" عندما لا توجد فلاتر أخرى مختارة.'); // Translated
                                 return;
-                             }
+                            }
                             tempSelectedFilters = tempSelectedFilters.filter(val => val !== 'all');
                         }
                     } else { // Handling non-'all' checkboxes
-                         if (isChecked) {
-                             // If a specific filter is checked, uncheck 'all' if it's currently selected
+                        if (isChecked) {
+                            // If a specific filter is checked, uncheck 'all' if it's currently selected
                             if (appState.selectedFilters.includes('all')) {
                                 tempSelectedFilters = tempSelectedFilters.filter(val => val !== 'all');
-                                 const allCheckbox = document.getElementById('filter-all');
+                                const allCheckbox = document.getElementById('filter-all');
                                 if (allCheckbox) allCheckbox.checked = false;
-                             }
-                             if (!tempSelectedFilters.includes(clickedValue)) {
-                                 tempSelectedFilters.push(clickedValue);
-                             }
-                         } else {
-                             // If a specific filter is unchecked
+                            }
+                            if (!tempSelectedFilters.includes(clickedValue)) {
+                                tempSelectedFilters.push(clickedValue);
+                            }
+                        } else {
+                            // If a specific filter is unchecked
                             tempSelectedFilters = tempSelectedFilters.filter(val => val !== clickedValue);
-                             // If no other filters are selected after unchecking, automatically select 'all'
+                            // If no other filters are selected after unchecking, automatically select 'all'
                             if (tempSelectedFilters.length === 0) {
-                                 tempSelectedFilters = ['all'];
-                                 const allCheckbox = document.getElementById('filter-all');
+                                tempSelectedFilters = ['all'];
+                                const allCheckbox = document.getElementById('filter-all');
                                 if (allCheckbox) allCheckbox.checked = true;
-                             }
-                         }
+                            }
+                        }
                     }
 
                     appState.selectedFilters = tempSelectedFilters;
@@ -2129,8 +2308,8 @@
             const generateRepresentativeKey = (name) => { // Renamed function
                 // Use a basic slug from name, but ensure it's safe and unique enough
                 // Since names are now Arabic, a simple timestamp+random might be safer/easier
-                 const safeNamePart = name.replace(/\s+/g, '-').replace(/[^\u0600-\u06FFa-zA-Z0-9-]/g, '').substring(0, 20); // Allow Arabic letters
-                 const timestamp = Date.now();
+                const safeNamePart = name.replace(/\s+/g, '-').replace(/[^\u0600-\u06FFa-zA-Z0-9-]/g, '').substring(0, 20); // Allow Arabic letters
+                const timestamp = Date.now();
                 const random = Math.random().toString(36).substring(2, 8);
 
                 return `${safeNamePart || 'rep'}-${timestamp}-${random}`;
@@ -2251,8 +2430,10 @@
                         topK: 40
                     }
                 };
+                const currentKey = getCookie('userApiKey'); // Use a consistent cookie name
+                const myKey = currentKey || GOOGLE_API_KEY; // Use a consistent cookie name
 
-                const apiResponse = await fetch(`${API_BASE_URL}?key=${GOOGLE_API_KEY}`, {
+                const apiResponse = await fetch(`${API_BASE_URL}?key=${myKey}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -2444,14 +2625,14 @@
                         console.warn("Chat input disabled due to missing/invalid API key.");
                         if (userInput) userInput.disabled = true;
                         if (sendButton) sendButton.disabled = true; // Ensure send button is also disabled
-                         if (chatbox && chatbox.children.length <= 1) { // Only show if not already showing initial API key error message
-                             // Check if the last message is NOT the API key error
-                             const lastMessage = chatbox.lastElementChild;
-                             const isAlreadyShowingError = lastMessage && lastMessage.classList.contains('bot-message') && lastMessage.textContent.includes('API Key');
+                        if (chatbox && chatbox.children.length <= 1) { // Only show if not already showing initial API key error message
+                            // Check if the last message is NOT the API key error
+                            const lastMessage = chatbox.lastElementChild;
+                            const isAlreadyShowingError = lastMessage && lastMessage.classList.contains('bot-message') && lastMessage.textContent.includes('API Key');
 
-                             if (!isAlreadyShowingError) {
+                            if (!isAlreadyShowingError) {
                                 displayBotMessage("مفتاح API غير مُعدّ. وظيفة الدردشة معطلة.", false); // Translated
-                             }
+                            }
                         }
                     }
                     scrollToBottom();
@@ -2661,7 +2842,7 @@
                     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                     applyTheme(newTheme);
                     saveTheme(newTheme);
-                     announce(`تم تبديل الوضع إلى ${newTheme === 'dark' ? 'الليلي' : 'النهاري'}.`); // Translated
+                    announce(`تم تبديل الوضع إلى ${newTheme === 'dark' ? 'الليلي' : 'النهاري'}.`); // Translated
                 });
             }
 
@@ -2687,7 +2868,7 @@
                             startChat(representativeObject);
                         } else {
                             console.warn(`Clicked representative with key ${representativeKey} not found in mutable list.`);
-                             announce(`الممثل المحدد غير موجود.`); // Translated
+                            announce(`الممثل المحدد غير موجود.`); // Translated
                         }
                     }
                 });
@@ -2732,4 +2913,4 @@
     </script>
 </body>
 
-</html> 
+</html>
