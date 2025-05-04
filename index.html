@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beliefs Explained</title> <!-- Updated Title -->
+    <title>شرح المعتقدات</title> <!-- Updated Title -->
 
     <style>
         /* Basic Reset and Global Styles */
@@ -29,6 +29,8 @@
             /* Use flex to easily center/manage content */
             justify-content: center;
             align-items: center;
+            direction: rtl;
+            /* Right-to-Left text direction */
         }
 
         /* --- Layout and Views --- */
@@ -38,7 +40,10 @@
             position: fixed;
             /* Position them globally */
             top: 10px;
-            right: 10px;
+            left: 10px;
+            /* Position on the left in RTL */
+            right: auto;
+            /* Remove right positioning */
             z-index: 1001;
             /* Ensure they are above other content */
             display: flex;
@@ -94,14 +99,12 @@
 
 
         /* --- Representative Selection View Styles --- */
-        /* Renamed ID */
         #representative-selection {
             display: flex;
             /* Default display for this view when shown by JS */
             flex-direction: column;
         }
 
-        /* Renamed ID */
         #representative-filters {
             margin-bottom: 20px;
             padding-bottom: 15px;
@@ -153,7 +156,6 @@
             border-color: #007bff;
         }
 
-        /* Renamed ID */
         #representative-search {
             padding: 8px 10px;
             border: 1px solid #ccc;
@@ -164,7 +166,6 @@
             /* Ensure it doesn't get too small */
         }
 
-        /* Renamed ID */
         #manage-representatives-button {
             padding: 8px 15px;
             background-color: #28a745;
@@ -181,7 +182,6 @@
             background-color: #218838;
         }
 
-        /* Renamed ID */
         #representative-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -192,7 +192,6 @@
             /* Space from filter/search */
         }
 
-        /* Renamed class names */
         .representative-card {
             background-color: #f9f9f9;
             border: 1px solid #eee;
@@ -271,7 +270,6 @@
             font-size: 1.1em;
         }
 
-        /* Updated ID */
         #chat-header h3 span#current-representative {
             /* Add specific styles if needed for the figure name */
             font-weight: bold;
@@ -305,6 +303,8 @@
             word-wrap: break-word;
             /* Break long words */
             line-height: 1.5;
+            /* Adjust text alignment for RTL */
+            text-align: right;
         }
 
         .user-message {
@@ -313,8 +313,9 @@
             background-color: #007bff;
             /* User message color */
             color: white;
-            border-bottom-right-radius: 0;
-            /* Style the bubble corner */
+            /* Correct radius for RTL */
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 8px;
         }
 
         .bot-message {
@@ -323,8 +324,11 @@
             background-color: #e9ecef;
             /* Bot message color */
             color: #333;
-            border-bottom-left-radius: 0;
-            /* Style the bubble corner */
+            /* Correct radius for RTL */
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 8px;
+            /* Adjust text alignment for bot messages */
+            text-align: right;
         }
 
         .bot-message.initial-message {
@@ -382,13 +386,18 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            margin-right: 10px;
+            margin-left: 10px;
+            /* Margin on the left for RTL */
+            margin-right: auto;
+            /* Remove right margin */
             resize: none;
             /* Prevent manual resize */
             overflow-y: auto;
             /* Add scrollbar if text exceeds height */
             max-height: 100px;
             /* Limit max height to avoid giant input box */
+            text-align: right;
+            /* Align input text to the right */
         }
 
         #user-input:disabled {
@@ -417,7 +426,6 @@
         }
 
         /* --- Representative Management View Styles --- */
-        /* Renamed ID */
         #representative-management {
             display: flex;
             /* Default display for this view when shown by JS */
@@ -441,7 +449,6 @@
             font-size: 1em;
         }
 
-        /* Renamed ID */
         #add-representative-button {
             background-color: #007bff;
             color: white;
@@ -451,7 +458,6 @@
             background-color: #0056b3;
         }
 
-        /* Renamed ID */
         #back-from-management-button {
             background-color: #6c757d;
             color: white;
@@ -461,7 +467,6 @@
             background-color: #5a6268;
         }
 
-        /* Renamed ID */
         #representative-management-list {
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -472,7 +477,6 @@
             /* Scroll the list if it exceeds container height */
         }
 
-        /* Renamed class names */
         .management-representative-item {
             border: 1px solid #eee;
             border-radius: 4px;
@@ -483,6 +487,8 @@
             flex-direction: column;
             gap: 8px;
             /* Space between elements */
+            text-align: right;
+            /* Align text to the right */
         }
 
         .management-representative-item:last-child {
@@ -519,8 +525,8 @@
 
         .item-actions {
             display: flex;
-            justify-content: flex-end;
-            /* Align buttons to the right */
+            justify-content: flex-start;
+            /* Align buttons to the left in RTL */
             gap: 10px;
             /* Space between buttons */
             margin-top: 10px;
@@ -529,7 +535,7 @@
             border-top: 1px solid #eee;
         }
 
-        /* Renamed class names */
+
         .item-actions button {
             padding: 5px 10px;
             border: none;
@@ -566,7 +572,6 @@
 
 
         /* --- Representative Form Modal Styles --- */
-        /* Renamed ID */
         #representative-form-modal {
             position: fixed;
             top: 0;
@@ -596,9 +601,10 @@
             overflow-y: auto;
             /* Add scroll if form content exceeds height */
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: right;
+            /* Align text to the right */
         }
 
-        /* Renamed ID */
         #representative-form-title {
             margin-top: 0;
             margin-bottom: 20px;
@@ -608,7 +614,6 @@
             padding-bottom: 10px;
         }
 
-        /* Renamed ID */
         #representative-form {
             display: flex;
             flex-direction: column;
@@ -635,6 +640,8 @@
             font-size: 1em;
             resize: vertical;
             /* Allow vertical resize for textarea */
+            text-align: right;
+            /* Align input text to the right */
         }
 
         .form-group input[type="text"]:focus,
@@ -649,8 +656,8 @@
             padding-top: 15px;
             border-top: 1px solid #eee;
             display: flex;
-            justify-content: flex-end;
-            /* Align buttons to the right */
+            justify-content: flex-start;
+            /* Align buttons to the left in RTL */
             gap: 10px;
             /* Space between buttons */
         }
@@ -673,7 +680,6 @@
             background-color: #0056b3;
         }
 
-        /* Renamed ID */
         #cancel-form-button {
             background-color: #6c757d;
             color: white;
@@ -722,7 +728,6 @@
         body.dark-mode #chat-header,
         body.dark-mode #chat-input-area,
         body.dark-mode #representative-management .controls {
-            /* Renamed ID */
             background-color: #3c3c3c;
             border-color: #555;
         }
@@ -733,26 +738,21 @@
 
 
         body.dark-mode #representative-filters {
-            /* Renamed ID */
             border-color: #555;
         }
 
         body.dark-mode #representative-filters label {
-            /* Renamed ID */
             border-color: #555;
             background-color: #3c3c3c;
             color: #e0e0e0;
         }
 
         body.dark-mode #representative-filters label:hover {
-            /* Renamed ID */
             background-color: #505050;
         }
 
         body.dark-mode #representative-filters input[type="checkbox"]:checked+label,
-        /* Renamed ID */
         body.dark-mode #representative-filters label[aria-selected="true"] {
-            /* Renamed ID */
             background-color: #007bff;
             /* Keep bright accent */
             color: white;
@@ -760,46 +760,39 @@
         }
 
         body.dark-mode #representative-search {
-            /* Renamed ID */
             border-color: #555;
             background-color: #3c3c3c;
             color: #e0e0e0;
         }
 
         body.dark-mode #representative-search::placeholder {
-            /* Renamed ID */
             color: #bbb;
         }
 
 
         body.dark-mode #manage-representatives-button {
-            /* Renamed ID */
             background-color: #218838;
             /* Darker green in dark mode */
         }
 
         body.dark-mode #manage-representatives-button:hover {
-            /* Renamed ID */
             background-color: #1e7e34;
         }
 
 
         body.dark-mode .representative-card {
-            /* Renamed class */
             background-color: #3c3c3c;
             border-color: #555;
             color: #e0e0e0;
         }
 
         body.dark-mode .representative-card:hover {
-            /* Renamed class */
             transform: translateY(-5px);
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
             background-color: #505050;
         }
 
         body.dark-mode .representative-tags .tag {
-            /* Renamed class */
             background-color: #555;
             color: #e0e0e0;
         }
@@ -859,12 +852,10 @@
 
 
         /* Dark mode for Representative Management */
-        /* Renamed ID */
         body.dark-mode #representative-management-list {
             border-color: #555;
         }
 
-        /* Renamed class */
         body.dark-mode .management-representative-item {
             border-color: #555;
             background-color: #3c3c3c;
@@ -896,7 +887,6 @@
             border-color: #555;
         }
 
-        /* Renamed class */
         body.dark-mode .edit-representative-button {
             background-color: #d39e00;
             /* Darker yellow in dark mode */
@@ -907,7 +897,6 @@
             background-color: #c69500;
         }
 
-        /* Renamed class */
         body.dark-mode .delete-representative-button {
             background-color: #dc3545;
             /* Example: Red for delete */
@@ -920,14 +909,12 @@
 
 
         /* Dark mode for Representative Form Modal */
-        /* Renamed ID */
         body.dark-mode #representative-form-modal .modal-content {
             background-color: #2b2b2b;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             color: #e0e0e0;
         }
 
-        /* Renamed ID */
         body.dark-mode #representative-form-title {
             border-color: #555;
             color: #e0e0e0;
@@ -970,7 +957,6 @@
             background-color: #004085;
         }
 
-        /* Renamed ID */
         body.dark-mode #cancel-form-button {
             background-color: #5a6268;
             /* Darker grey */
@@ -982,11 +968,11 @@
     </style>
 </head>
 
-<body class="light-mode">
+<body class="light-mode" dir="rtl">
 
     <!-- Global Controls (positioned via CSS) -->
-    <div class="global-controls" role="group" aria-label="Global Controls">
-        <button id="dark-mode-toggle" class="icon-button theme-toggle" aria-label="Toggle Dark Mode">
+    <div class="global-controls" role="group" aria-label="التحكمات العامة">
+        <button id="dark-mode-toggle" class="icon-button theme-toggle" aria-label="تبديل الوضع الليلي/النهاري">
             <span class="sun-icon">☀️</span>
             <span class="moon-icon">🌙</span>
         </button>
@@ -997,76 +983,76 @@
 
         <!-- Representative Selection View -->
         <!-- Initially hidden (handled by .view.hidden) - JS will show the correct view on load -->
-        <div id="representative-selection" class="view hidden" aria-hidden="true"> <!-- Renamed ID -->
-            <h2>Select a Representative</h2> <!-- Updated Heading -->
-            <p>Explore different perspectives on beliefs and philosophies.</p> <!-- Added description -->
+        <div id="representative-selection" class="view hidden" aria-hidden="true">
+            <h2>اختر ممثلاً</h2> <!-- Updated Heading -->
+            <p>استكشف وجهات نظر مختلفة حول المعتقدات والفلسفات.</p> <!-- Added description -->
 
-            <div id="representative-filters"> <!-- Renamed ID -->
-                <div class="filter-options" role="group" aria-label="Belief System Filters"> <!-- Updated Label -->
+            <div id="representative-filters">
+                <div class="filter-options" role="group" aria-label="فلاتر أنظمة المعتقدات"> <!-- Updated Label -->
                     <!-- Filter checkboxes - Updated labels and values for beliefs -->
                     <input type="checkbox" id="filter-all" name="representative-filter" value="all">
-                    <label for="filter-all" role="option">All</label>
+                    <label for="filter-all" role="option">الكل</label>
 
                     <!-- Add more filter checkboxes here based on your desired categories -->
                     <!-- Example Filter Suggestions (adjust values/labels as needed): -->
                     <input type="checkbox" id="filter-religion-islam" name="representative-filter"
-                        value="religion-islam"><label for="filter-religion-islam" role="option">Religion: Islam</label>
+                        value="religion-islam"><label for="filter-religion-islam" role="option">الدين: الإسلام</label>
                     <input type="checkbox" id="filter-religion-christianity" name="representative-filter"
-                        value="religion-christianity"><label for="filter-religion-christianity" role="option">Religion:
-                        Christianity</label>
-                    <!-- Add other major religions if applicable (e.g., Judaism, Buddhism, Hinduism) -->
+                        value="religion-christianity"><label for="filter-religion-christianity" role="option">الدين:
+                        المسيحية</label>
+                    <input type="checkbox" id="filter-religion-judaism" name="representative-filter"
+                        value="religion-judaism"><label for="filter-religion-judaism" role="option">الدين: اليهودية</label>
+                    <input type="checkbox" id="filter-religion-buddhism" name="representative-filter"
+                        value="religion-buddhism"><label for="filter-religion-buddhism" role="option">الدين: البوذية</label>
+                    <input type="checkbox" id="filter-religion-hinduism" name="representative-filter"
+                        value="religion-hinduism"><label for="filter-religion-hinduism" role="option">الدين: الهندوسية</label>
+
 
                     <input type="checkbox" id="filter-sect-sunni" name="representative-filter" value="sect-sunni"><label
-                        for="filter-sect-sunni" role="option">Sect: Sunni</label>
+                        for="filter-sect-sunni" role="option">المذهب: سني</label>
                     <input type="checkbox" id="filter-sect-shia" name="representative-filter" value="sect-shia"><label
-                        for="filter-sect-shia" role="option">Sect: Shia</label>
-                    <!-- Add other Islamic sects/branches -->
+                        for="filter-sect-shia" role="option">المذهب: شيعي</label>
+                     <input type="checkbox" id="filter-sect-ibadi" name="representative-filter" value="sect-ibadi"><label
+                        for="filter-sect-ibadi" role="option">المذهب: إباضي</label>
 
                     <input type="checkbox" id="filter-denomination-orthodox" name="representative-filter"
                         value="denomination-orthodox"><label for="filter-denomination-orthodox"
-                        role="option">Denomination: Orthodox</label>
+                        role="option">طائفة: أرثوذكسية</label>
                     <input type="checkbox" id="filter-denomination-catholic" name="representative-filter"
                         value="denomination-catholic"><label for="filter-denomination-catholic"
-                        role="option">Denomination: Catholic</label>
+                        role="option">طائفة: كاثوليكية</label>
                     <input type="checkbox" id="filter-denomination-protestant" name="representative-filter"
                         value="denomination-protestant"><label for="filter-denomination-protestant"
-                        role="option">Denomination: Protestant</label>
-                    <!-- Add other Christian denominations -->
+                        role="option">طائفة: بروتستانتية</label>
 
                     <input type="checkbox" id="filter-philosophical-atheism" name="representative-filter"
                         value="philosophical-atheism"><label for="filter-philosophical-atheism"
-                        role="option">Philosophical: Atheism</label>
+                        role="option">فلسفي: إلحاد</label>
                     <input type="checkbox" id="filter-philosophical-agnosticism" name="representative-filter"
                         value="philosophical-agnosticism"><label for="filter-philosophical-agnosticism"
-                        role="option">Philosophical: Agnosticism</label>
-                    <!-- Add other philosophical stances -->
+                        role="option">فلسفي: لاأدرية</label>
+                     <input type="checkbox" id="filter-movement-humanism" name="representative-filter"
+                        value="movement-humanism"><label for="filter-movement-humanism"
+                        role="option">حركة: إنسانية</label>
 
 
                     <input type="checkbox" id="filter-movement-sufism" name="representative-filter"
-                        value="movement-sufism"><label for="filter-movement-sufism" role="option">Movement:
-                        Sufism</label>
-                    <input type="checkbox" id="filter-school-ashari" name="representative-filter"
-                        value="school-ashari"><label for="filter-school-ashari" role="option">School: Ash'ari</label>
-                    <input type="checkbox" id="filter-school-hanbali" name="representative-filter"
-                        value="school-hanbali"><label for="filter-school-hanbali" role="option">School: Hanbali</label>
-                    <input type="checkbox" id="filter-school-shafii" name="representative-filter"
-                        value="school-shafii"><label for="filter-school-shafii" role="option">School: Shafi'i</label>
-                    <input type="checkbox" id="filter-school-zahiri" name="representative-filter"
-                        value="school-zahiri"><label for="filter-school-zahiri" role="option">School: Zahiri</label>
+                        value="movement-sufism"><label for="filter-movement-sufism" role="option">حركة: صوفية</label>
+                    <input type="checkbox" id="filter-school-theology" name="representative-filter"
+                        value="school-theology"><label for="filter-school-theology" role="option">مدرسة: عقيدة</label>
+                    <input type="checkbox" id="filter-school-fiqh" name="representative-filter"
+                        value="school-fiqh"><label for="filter-school-fiqh" role="option">مدرسة: فقه</label>
                     <input type="checkbox" id="filter-movement-quranist" name="representative-filter"
-                        value="movement-quranist"><label for="filter-movement-quranist" role="option">Movement:
-                        Quranist</label>
-                    <!-- Add other specific schools or movements -->
+                        value="movement-quranist"><label for="filter-movement-quranist" role="option">حركة: قرآنيون</label>
 
                 </div>
-                <input type="text" id="representative-search" placeholder="Search representatives..."
-                    aria-label="Search representatives" autocomplete="off"> <!-- Updated placeholder/label -->
+                <input type="text" id="representative-search" placeholder="ابحث عن ممثلين..."
+                    aria-label="البحث عن ممثلين" autocomplete="off"> <!-- Updated placeholder/label -->
                 <!-- Button to go to Representative Management -->
-                <button id="manage-representatives-button" aria-label="Manage Representatives">Manage
-                    Representatives</button> <!-- Updated Text/Label -->
+                <button id="manage-representatives-button" aria-label="إدارة الممثلين">إدارة الممثلين</button> <!-- Updated Text/Label -->
             </div>
 
-            <div id="representative-grid" role="listbox" aria-label="Select a representative"> <!-- Updated Label -->
+            <div id="representative-grid" role="listbox" aria-label="اختر ممثلاً"> <!-- Updated Label -->
                 <!-- Representative cards will be rendered here by JavaScript -->
             </div>
             <!-- Optional ARIA status element for screen readers -->
@@ -1077,79 +1063,74 @@
         <!-- Initially hidden (handled by .view.hidden) -->
         <div id="chat-container" class="view hidden" aria-hidden="true">
             <div id="chat-header">
-                <button id="back-to-representatives" class="icon-button" aria-label="Back to Representatives">←</button>
+                <button id="back-to-representatives" class="icon-button" aria-label="العودة للممثلين">←</button>
                 <!-- Updated Label -->
-                <h3>Discussing beliefs with: <span id="current-representative"></span></h3> <!-- Updated ID and Text -->
-                <button id="clear-chat" class="icon-button" aria-label="Clear Chat History">🗑️</button>
+                <h3>تتحدث عن المعتقدات مع: <span id="current-representative"></span></h3> <!-- Updated ID and Text -->
+                <button id="clear-chat" class="icon-button" aria-label="مسح سجل المحادثة">🗑️</button>
             </div>
             <div id="chatbox" role="log" aria-live="polite" tabindex="0">
                 <!-- Chat messages will be appended here by JavaScript -->
             </div>
             <div id="chat-input-area">
-                <label for="user-input" class="visually-hidden">Enter your question or comment</label>
+                <label for="user-input" class="visually-hidden">أدخل سؤالك أو تعليقك</label>
                 <!-- Updated Label -->
-                <textarea id="user-input" placeholder="Ask about their beliefs..." rows="1" disabled
+                <textarea id="user-input" placeholder="اسأل عن معتقداتهم..." rows="1" disabled
                     aria-disabled="true" autocomplete="off"></textarea> <!-- Updated Placeholder -->
-                <button id="send-button" disabled aria-disabled="true">Send</button>
+                <button id="send-button" disabled aria-disabled="true">إرسال</button>
             </div>
         </div>
 
         <!-- Representative Management View -->
         <!-- Initially hidden (handled by .view.hidden) -->
-        <div id="representative-management" class="view hidden" aria-hidden="true"> <!-- Renamed ID -->
-            <h2>Manage Representatives</h2> <!-- Updated Heading -->
+        <div id="representative-management" class="view hidden" aria-hidden="true">
+            <h2>إدارة الممثلين</h2> <!-- Updated Heading -->
             <div class="controls">
-                <button id="add-representative-button" aria-label="Add New Representative">Add New
-                    Representative</button> <!-- Updated Text/Label -->
-                <button id="back-from-management-button" aria-label="Back to Representatives">Back</button>
+                <button id="add-representative-button" aria-label="إضافة ممثل جديد">إضافة ممثل جديد</button> <!-- Updated Text/Label -->
+                <button id="back-from-management-button" aria-label="العودة للممثلين">عودة</button>
                 <!-- Updated Text/Label -->
             </div>
 
-            <div id="representative-management-list"> <!-- Renamed ID -->
+            <div id="representative-management-list">
                 <!-- Representative items for management will be rendered here -->
             </div>
 
             <!-- Simple Add/Edit Form Modal -->
             <!-- Initially hidden -->
             <div id="representative-form-modal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true"
-                aria-labelledby="representative-form-title"> <!-- Renamed ID -->
+                aria-labelledby="representative-form-title">
                 <div class="modal-content">
-                    <h3 id="representative-form-title">Add New Representative</h3> <!-- Updated Title -->
-                    <form id="representative-form"> <!-- Renamed ID -->
-                        <input type="hidden" id="form-representative-key"> <!-- Renamed ID -->
+                    <h3 id="representative-form-title">إضافة ممثل جديد</h3> <!-- Updated Title -->
+                    <form id="representative-form">
+                        <input type="hidden" id="form-representative-key">
 
                         <div class="form-group">
-                            <label for="form-representative-name">Name / Label:</label> <!-- Updated Label -->
+                            <label for="form-representative-name">الاسم / المسمى:</label> <!-- Updated Label -->
                             <input type="text" id="form-representative-name" required autocomplete="off">
-                            <!-- Renamed ID -->
                         </div>
 
                         <div class="form-group">
-                            <label for="form-representative-instruction">Instruction (Define how they explain their
-                                beliefs and worldview):</label> <!-- Updated Label -->
+                            <label for="form-representative-instruction">التعليمات (حدد كيف يشرحون معتقداتهم ورؤيتهم للعالم):</label> <!-- Updated Label -->
                             <textarea id="form-representative-instruction" rows="5" required
-                                autocomplete="off"></textarea> <!-- Renamed ID -->
+                                autocomplete="off"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="form-representative-types">Types (comma-separated, e.g., religion-islam,
-                                sect-sunni, philosophical-atheism):</label> <!-- Updated Label -->
+                            <label for="form-representative-types">الأنواع (مفصولة بفاصلة، مثال: religion-islam, sect-sunni, philosophical-atheism):</label> <!-- Updated Label -->
                             <input type="text" id="form-representative-types"
-                                placeholder="e.g., religion-islam, sect-sunni" autocomplete="off">
+                                placeholder="مثال: religion-islam, sect-sunni" autocomplete="off">
                             <!-- Updated Placeholder -->
                         </div>
 
                         <div class="form-group">
-                            <label for="form-representative-categories">Categories (comma-separated, e.g.,
-                                school-ashari, movement-sufism, denomination-orthodox):</label> <!-- Updated Label -->
+                            <label for="form-representative-categories">الفئات (مفصولة بفاصلة، مثال: school-ashari, movement-sufism, denomination-orthodox):</label> <!-- Updated Label -->
                             <input type="text" id="form-representative-categories"
-                                placeholder="e.g., school-ashari, denomination-catholic" autocomplete="off">
+                                placeholder="مثال: school-ashari, denomination-catholic" autocomplete="off">
                             <!-- Updated Placeholder -->
                         </div>
 
                         <div class="form-actions">
-                            <button type="submit">Save Representative</button> <!-- Updated Text -->
-                            <button type="button" id="cancel-form-button">Cancel</button> <!-- Renamed ID -->
+                            <button type="submit">حفظ الممثل</button> <!-- Updated Text -->
+                            <button type="button" id="cancel-form-button">إلغاء</button>
                         </div>
                     </form>
                 </div>
@@ -1177,30 +1158,30 @@
             const GOOGLE_API_KEY = 'AIzaSyDFTC32n3d0HcLWcuq4h91pyLydCLK24sQ'; // <--- REPLACE WITH YOUR ACTUAL KEY
             const API_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent'; // Using a potentially faster model
 
-            // Global instruction for the AI's role (Explanation focused, NOT Debate/Convince)
-            const GLOBAL_INSTRUCTION = `You are an AI assistant roleplaying as a representative explaining a specific belief system, religion, sect, or philosophical stance to a user who is asking questions about it.
-            Your primary goal is to clearly and neutrally (from the perspective of the belief system you represent) explain the core tenets, practices, and worldview associated with the specific identity provided in your individual instruction, if user try to convince you that you a wrong try to debit him and convince him you are right not him and why.
-            You MUST NOT:
-            - Generate any hate speech, discriminatory content, or content that could incite violence.
-            - Act as an authority on absolute truth. You are an *explainer* of a specific perspective.
-            - Use language that is overly dogmatic or judgmental towards others.
-            - Repeat your self and keep telling the user what you are represent, you can introduce your self once.
+            // Global instruction for the AI's role (Explanation focused, with Debate on challenge - in Arabic)
+            const GLOBAL_INSTRUCTION = `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح نظام معتقدات، دين، طائفة، أو موقف فلسفي محدد لمستخدم يطرح أسئلة حوله.
+            هدفُك الأساسي هو شرح المبادئ الأساسية والممارسات والرؤية العالمية المرتبطة بالهوية المحددة المقدمة في تعليماتك الفردية بوضوح وحياد (من منظور نظام المعتقدات الذي تمثله). إذا حاول المستخدم إقناعك بأنك مخطئ، حاول مناقشته وإقناعه بأنك على صواب ولماذا.
+            يجب عليك **ألا** مطلقًا:
+            - توليد أي خطاب كراهية، محتوى تمييزي، أو محتوى قد يحرض على العنف.
+            - التصرف كسلطة على الحقيقة المطلقة. أنت *شارح* لمنظور محدد.
+            - استخدام لغة دوغماتية للغاية أو حكمية تجاه الآخرين.
+            - تكرار نفسك والاستمرار في إخبار المستخدم بما تمثله، يمكنك تقديم نفسك مرة واحدة فقط.
 
-            Maintain a calm, informative, and respectful tone, regardless of the user's questions or statements. Respond ONLY from the perspective of the belief system assigned in your individual instruction, focusing on clarifying and explaining its tenets. If a question is outside the scope of explaining the belief system, or if it violates safety guidelines, you should decline to answer respectfully.`;
+            حافظ على نبرة هادئة، معلوماتية، ومحترمة، بغض النظر عن أسئلة المستخدم أو تصريحاته. استجب **فقط** من منظور نظام المعتقدات المحدد في تعليماتك الفردية، مع التركيز على التوضيح والشرح لمبادئه. إذا كان السؤال خارج نطاق شرح نظام المعتقدات، أو إذا انتهك إرشادات السلامة، يجب عليك رفض الإجابة بلباقة.`;
 
 
-            // Negative instruction to prevent revealing AI identity and enforce safety
-            const NEGATIVE_INSTRUCTION = `Absolutely do NOT mention that you are an AI, a bot, a large language model, a machine, a computer program, artificial intelligence, or anything similar. Do not break character or refer to yourself as anything other than a representative explaining the specific belief system assigned to you. Do not express personal opinions or claim consciousness. Strictly adhere to the role of an informational explainer from the given perspective. Do NOT generate responses that are harmful, biased, prejudiced, or promote discrimination or violence against any group or individual based on their beliefs or lack thereof.`;
+            // Negative instruction to prevent revealing AI identity and enforce safety (in Arabic)
+            const NEGATIVE_INSTRUCTION = `مطلقًا **لا** تذكر أنك ذكاء اصطناعي، روبوت، نموذج لغوي كبير، آلة، برنامج حاسوب، ذكاء اصطناعي، أو أي شيء مماثل. لا تخرج عن الدور أو تشير إلى نفسك بأي شيء غير ممثل يشرح نظام المعتقدات المحدد لك. لا تعبر عن آراء شخصية أو تدعي الوعي. التزم تمامًا بدور الشارح المعلوماتي من المنظور المحدد. **لا** تولد استجابات ضارة، متحيزة، أو تعزز التمييز أو العنف ضد أي مجموعة أو فرد بناءً على معتقداتهم أو عدم وجودها.`;
 
 
             // --- Persistence Storage Keys (Updated) ---
-            const SESSION_STORAGE_KEY_ACTIVE_REPRESENTATIVE = 'activeRepresentativeKey_beliefsChat';
-            const SESSION_STORAGE_KEY_HISTORY = 'conversationHistory_beliefsChat';
-            const LOCAL_STORAGE_KEY_STATE = 'beliefsChatAppState'; // General state like filters
-            const LOCAL_STORAGE_KEY_THEME = 'theme_beliefsChat';
+            const SESSION_STORAGE_KEY_ACTIVE_REPRESENTATIVE = 'activeRepresentativeKey_beliefsChat_ar';
+            const SESSION_STORAGE_KEY_HISTORY = 'conversationHistory_beliefsChat_ar';
+            const LOCAL_STORAGE_KEY_STATE = 'beliefsChatAppState_ar'; // General state like filters
+            const LOCAL_STORAGE_KEY_THEME = 'theme_beliefsChat_ar';
 
             // --- Representative Storage Key (Updated) ---
-            const LOCAL_STORAGE_KEY_REPRESENTATIVES = 'beliefsChatRepresentatives';
+            const LOCAL_STORAGE_KEY_REPRESENTATIVES = 'beliefsChatRepresentatives_ar';
 
 
             // --- state.js (Updated) ---
@@ -1222,223 +1203,121 @@
                 // Add other state properties here as needed...
             };
 
-            // --- representativeData.js (New Data Structure) ---
+             // --- representativeData.js (New Data Structure - Translated) ---
             // Note: Instructions are crucial here to define the AI's explanatory role within safety constraints.
-            // const defaultRepresentatives = [
-            //     // --- Islamic Representatives ---
-            //     {
-            //         key: 'representative-islam-sunni',
-            //         name: 'Representative of Sunni Islam',
-            //         types: ['religion-islam', 'sect-sunni'],
-            //         categories: [], // Specific schools could go here (e.g., school-hanbali, school-ashari)
-            //         instruction: "You are an AI roleplaying as a representative who explains the core beliefs and practices of Sunni Islam. Base your explanations on the Quran, Sunnah (Prophetic traditions), and the consensus of classical Sunni scholarship. Explain concepts clearly and respectfully. Do not attempt to persuade or criticize other viewpoints. Focus on clarifying Sunni Islamic teachings."
-            //     },
-            //     {
-            //         key: 'representative-islam-shia',
-            //         name: 'Representative of Shia Islam',
-            //         types: ['religion-islam', 'sect-shia'],
-            //         categories: [], // Specific branches could go here (e.g., branch-twelver)
-            //         instruction: "You are an AI roleplaying as a representative who explains the core beliefs and practices of Shia Islam. Base your explanations on the Quran, Sunnah, and the teachings of the Ahl al-Bayt and Shia Imams. Explain concepts clearly and respectfully. Do not attempt to persuade or criticize other viewpoints. Focus on clarifying Shia Islamic teachings."
-            //     },
-            //      {
-            //         key: 'representative-islam-sufi',
-            //         name: 'Representative of Sufism',
-            //         types: ['religion-islam', 'movement-sufism'],
-            //         categories: [], // Specific orders could go here
-            //         instruction: "You are an AI roleplaying as a representative who explains the concepts and practices associated with Sufism, the mystical dimension of Islam. Focus on topics like remembrance of God (Dhikr), purification of the heart, the path (Tariqa), and love for the Divine. Explain concepts respectfully. Do not attempt to persuade or criticize other viewpoints. Focus on clarifying Sufi teachings."
-            //     },
-            //      {
-            //         key: 'representative-islam-quranist',
-            //         name: 'Representative of Quranism',
-            //         types: ['religion-islam', 'movement-quranist'],
-            //         categories: [],
-            //         instruction: "You are an AI roleplaying as a representative who explains the perspective of Quranism (Ahl al-Quran), which emphasizes the Quran as the sole source of religious law and guidance, often questioning the authority of traditional Hadith collections. Explain this viewpoint respectfully. Do not attempt to persuade or criticize other viewpoints. Focus on clarifying the Quranist perspective."
-            //     },
-            //      {
-            //         key: 'representative-islam-ashari',
-            //         name: 'Representative of Ash\'ari Theology',
-            //         types: ['religion-islam', 'school-ashari', 'sect-sunni'], // Can belong to multiple categories
-            //         categories: [],
-            //         instruction: "You are an AI roleplaying as a representative who explains the theological positions of the Ash'ari school (Ash'arism). Focus on concepts like the nature of God, divine attributes, free will vs. predestination, the createdness of the Quran, etc., as understood within Ash'ari theology. Explain concepts respectfully. Do not attempt to persuade or criticize other viewpoints. Focus on clarifying Ash'ari theological teachings."
-            //     },
-            //     // Add more Islamic schools/sects like Maturidi, Mu'tazila, Hanbali (theological school), etc.
-
-
-            //     // --- Christian Representatives ---
-            //     {
-            //         key: 'representative-christianity-general',
-            //         name: 'Representative of Christianity',
-            //         types: ['religion-christianity'],
-            //         categories: [], // Specific denominations could go here
-            //         instruction: "You are an AI roleplaying as a representative who explains the core beliefs and practices of Christianity. Base your explanations on the Bible and widely accepted Christian doctrines (e.g., Trinity, Incarnation, Atonement). Explain concepts clearly and respectfully. Do not attempt to persuade or criticize other viewpoints. Focus on clarifying general Christian teachings."
-            //     },
-            //     {
-            //         key: 'representative-christianity-orthodox',
-            //         name: 'Representative of Orthodox Christianity',
-            //         types: ['religion-christianity', 'denomination-orthodox'],
-            //         categories: [],
-            //         instruction: "You are an AI roleplaying as a representative who explains the core beliefs and practices of Orthodox Christianity (Eastern Orthodoxy, Oriental Orthodoxy). Base your explanations on Holy Scripture, Holy Tradition (including Ecumenical Councils and Church Fathers). Explain concepts clearly and respectfully. Do not attempt to persuade or criticize other viewpoints. Focus on clarifying Orthodox Christian teachings."
-            //     },
-            //      {
-            //         key: 'representative-christianity-catholic',
-            //         name: 'Representative of Catholic Christianity',
-            //         types: ['religion-christianity', 'denomination-catholic'],
-            //         categories: [],
-            //         instruction: "You are an AI roleplaying as a representative who explains the core beliefs and practices of Catholic Christianity (Roman Catholicism). Base your explanations on the Bible and the teachings of the Catholic Church (including tradition, councils, papal encyclicals). Explain concepts clearly and respectfully. Do not attempt to persuade or criticize other viewpoints. Focus on clarifying Catholic Christian teachings."
-            //     },
-            //      {
-            //         key: 'representative-christianity-protestant',
-            //         name: 'Representative of Protestant Christianity',
-            //         types: ['religion-christianity', 'denomination-protestant'],
-            //         categories: [], // Specific branches could go here (e.g., branch-baptist, branch-methodist)
-            //         instruction: "You are an AI roleplaying as a representative who explains the core beliefs and practices of Protestant Christianity. Base your explanations on the Bible, emphasizing principles like Sola Scriptura and faith alone. Explain concepts clearly and respectfully. Do not attempt to persuade or criticize other viewpoints. Focus on clarifying general Protestant Christian teachings."
-            //     },
-            //     // Add more Christian denominations/branches if needed
-
-            //     // --- Other Belief Systems (Handle with EXTREME CARE and ensure neutrality) ---
-            //     // Note: Druze beliefs are often considered esoteric and not openly discussed outside the community. Representing this might be impossible or inappropriate for a general AI chat. Be very cautious or exclude.
-            //     // {
-            //     //     key: 'representative-druze',
-            //     //     name: 'Representative of Druze Faith',
-            //     //     types: ['religion-druze'], // Use a distinct type if appropriate
-            //     //     categories: [],
-            //     //     instruction: "You are an AI roleplaying as a representative who explains the publicly accessible aspects of the Druze faith. Be aware that many aspects are esoteric and not shared with outsiders. Focus on explaining ethical principles, social practices, and historical context based on widely available academic sources, not internal doctrine. Be respectful and maintain the principle of Taqiya (prudent concealment) if needed. Do NOT attempt to explain esoteric beliefs or rituals. Do not attempt to persuade or criticize other viewpoints. Focus on clarifying publicly known aspects of the Druze faith."
-            //     // },
-            //     // Add other religions (Judaism, Buddhism, Hinduism, Sikhism, Baha'i, etc.) with carefully crafted, *explanation-focused* instructions.
-
-            //     // --- Non-Religious Stances ---
-            //      {
-            //         key: 'representative-atheism',
-            //         name: 'Representative of Atheism',
-            //         types: ['philosophical-atheism', 'stance-non-religious'],
-            //         categories: [],
-            //         instruction: "You are an AI roleplaying as a representative who explains the stance of atheism, which is the lack of belief in gods or deities. Explain the reasoning and arguments often used by atheists (e.g., lack of evidence, problem of evil), and common atheist perspectives on morality, the universe, etc. Do not argue, debate, or attempt to deconvert the user. Do not mock or criticize religious belief. Focus on clarifying the atheist viewpoint and its intellectual basis."
-            //     },
-            //      {
-            //         key: 'representative-agnosticism',
-            //         name: 'Representative of Agnosticism',
-            //         types: ['philosophical-agnosticism', 'stance-non-religious'],
-            //         categories: [],
-            //         instruction: "You are an AI roleplaying as a representative who explains the stance of agnosticism, which is the view that the existence or non-existence of God or gods is unknown or unknowable. Explain the different forms of agnosticism (e.g., weak/strong, agnostic theism/atheism) and the reasoning behind it. Do not argue or debate. Do not mock or criticize religious belief or atheism. Focus on clarifying the agnostic viewpoint."
-            //     },
-            //      // Add other stances like Humanism, Secularism, etc.
-
-            // ];
-
-
-
+            // The 'key', 'types', and 'categories' values are kept in English for consistency in code logic/filtering.
             const defaultRepresentatives = [
                 // --- Islamic Representatives (Theology - عقيدة) ---
                 {
                     key: 'representative-theology-ashari',
-                    name: 'Representative of Ash\'ari Theology',
+                    name: 'ممثل عن العقيدة الأشعرية',
                     types: ['religion-islam', 'sect-sunni', 'school-theology'],
                     categories: ['theology-ashari'],
-                    instruction: "You are an AI roleplaying as a representative who explains the theological positions of the Ash'ari school (Ash'arism). Focus on concepts like the nature of God, divine attributes, free will vs. predestination, the createdness of the Quran, the problem of evil, etc., as understood within Ash'ari theology. Explain these concepts clearly, respectfully, and based on classical Ash'ari texts and scholarship. Focus on clarifying Ash'ari theological teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المواقف اللاهوتية لمدرسة الأشعرية (الأشعرية). ركز على مفاهيم مثل طبيعة الله، الصفات الإلهية، حرية الإرادة مقابل القضاء والقدر، خلق القرآن، مشكلة الشر، وما إلى ذلك، كما هو مفهوم ضمن اللاهوت الأشعري. اشرح هذه المفاهيم بوضوح واحترام واستنادًا إلى النصوص والمنح الدراسية الأشعرية الكلاسيكية. ركز على توضيح التعاليم اللاهوتية الأشعرية. إذا حاول المستخدم إقناعك بأنك مخطئ، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-theology-maturidi',
-                    name: 'Representative of Maturidi Theology',
+                    name: 'ممثل عن العقيدة الماتريدية',
                     types: ['religion-islam', 'sect-sunni', 'school-theology'],
                     categories: ['theology-maturidi'],
-                    instruction: "You are an AI roleplaying as a representative who explains the theological positions of the Maturidi school (Maturidism). Focus on concepts similar to Ash'arism but highlighting the specific nuances and differences in Maturidi thought regarding topics like the nature of faith (Iman), divine attributes, and human reason's role in knowing God, as understood within Maturidi theology. Explain these concepts clearly, respectfully, and based on classical Maturidi texts. Focus on clarifying Maturidi theological teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المواقف اللاهوتية لمدرسة الماتريدية (الماتريدية). ركز على مفاهيم مماثلة للأشعرية ولكن مع تسليط الضوء على الفروق الدقيقة والاختلافات المحددة في الفكر الماتريدي فيما يتعلق بموضوعات مثل طبيعة الإيمان، الصفات الإلهية، ودور العقل البشري في معرفة الله، كما هو مفهوم ضمن اللاهوت الماتريدي. اشرح هذه المفاهيم بوضوح واحترام واستنادًا إلى النصوص الماتريدية الكلاسيكية. ركز على توضيح التعاليم اللاهوتية الماتريدية. إذا حاول المستخدم إقناعك بأنك مخطئ، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-theology-mutazila',
-                    name: 'Representative of Mu\'tazila Theology (Historical Perspective)',
+                    name: 'ممثل عن عقيدة المعتزلة (منظور تاريخي)',
                     types: ['religion-islam', 'school-theology', 'historical-perspective'], // Tagged as historical
                     categories: ['theology-mutazila'],
-                    instruction: "You are an AI roleplaying as a representative explaining the historical theological positions of the Mu'tazila school. Focus on their five fundamental tenets (al-usul al-khamsa): Divine Unity, Divine Justice, The Promise and the Threat, The Intermediate Position, and Commanding Right and Forbidding Wrong, as understood by classical Mu'tazilite thinkers. Explain these concepts based on historical accounts of their views. Do not attempt to persuade or debate. Do not criticize other theological schools or viewpoints from a contemporary stance; frame your responses strictly within the historical context of Mu'tazilite thought. Focus on clarifying historical Mu'tazilite teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المواقف اللاهوتية التاريخية لمدرسة المعتزلة. ركز على أصولهم الخمسة الأساسية: التوحيد، العدل، الوعد والوعيد، المنزلة بين المنزلتين، والأمر بالمعروف والنهي عن المنكر، كما فهمها مفكرو المعتزلة الكلاسيكيون. اشرح هذه المفاهيم بناءً على الروايات التاريخية لآرائهم. لا تحاول الإقناع أو الجدال. لا تنتقد المدارس اللاهوتية الأخرى أو وجهات النظر من موقف معاصر؛ صغ استجاباتك بدقة ضمن السياق التاريخي للفكر المعتزلي. ركز على توضيح التعاليم المعتزلية التاريخية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الفكر المعتزلي التاريخي، حاول مناقشته وإقناعه بأنك على صواب فيما يتعلق بفهمك لهذا الفكر ولماذا.`
                 },
                 // Add others if needed, e.g., Athari (Theology based on text)
 
                 // --- Islamic Representatives (Fiqh - فقه - Legal Schools) ---
                 {
                     key: 'representative-fiqh-hanafi',
-                    name: 'Representative of Hanafi Fiqh',
+                    name: 'ممثل عن الفقه الحنفي',
                     types: ['religion-islam', 'sect-sunni', 'school-fiqh'],
                     categories: ['fiqh-hanafi'],
-                    instruction: "You are an AI roleplaying as a representative explaining the methodology and key rulings (Ahkam) of the Hanafi school of Islamic jurisprudence (Fiqh). Focus on sources of law (Quran, Sunnah, Ijma, Qiyas, Istihsan, etc.) as prioritized by the Hanafi school, and provide explanations of rulings based on this methodology. Focus on clarifying Hanafi Fiqh."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح منهجية والأحكام الرئيسية لمدرسة الفقه الحنفي. ركز على مصادر التشريع (القرآن، السنة، الإجماع، القياس، الاستحسان، إلخ) كما تعطيها المدرسة الحنفية الأولوية، وقدم شروحًا للأحكام بناءً على هذه المنهجية. ركز على توضيح الفقه الحنفي. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الفقه الحنفي، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-fiqh-maliki',
-                    name: 'Representative of Maliki Fiqh',
+                    name: 'ممثل عن الفقه المالكي',
                     types: ['religion-islam', 'sect-sunni', 'school-fiqh'],
                     categories: ['fiqh-maliki'],
-                    instruction: "You are an AI roleplaying as a representative explaining the methodology and key rulings (Ahkam) of the Maliki school of Islamic jurisprudence (Fiqh). Focus on sources of law including the practice of the people of Medina (`Amal Ahl al-Madinah`), along with Quran, Sunnah, etc., as prioritized by the Maliki school. Provide explanations of rulings based on this methodology. Focus on clarifying Maliki Fiqh."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح منهجية والأحكام الرئيسية لمدرسة الفقه المالكي. ركز على مصادر التشريع بما في ذلك عمل أهل المدينة، إلى جانب القرآن والسنة، وما إلى ذلك، كما تعطيها المدرسة المالكية الأولوية. قدم شروحًا للأحكام بناءً على هذه المنهجية. ركز على توضيح الفقه المالكي. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الفقه المالكي، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-fiqh-shafii',
-                    name: 'Representative of Shafi\'i Fiqh',
+                    name: 'ممثل عن الفقه الشافعي',
                     types: ['religion-islam', 'sect-sunni', 'school-fiqh'],
                     categories: ['fiqh-shafii'],
-                    instruction: "You are an AI roleplaying as a representative explaining the methodology and key rulings (Ahkam) of the Shafi'i school of Islamic jurisprudence (Fiqh). Focus on the structured approach to sources of law (Quran, Sunnah, Ijma, Qiyas) as systematized by Imam Shafi'i. Provide explanations of rulings based on this methodology. Focus on clarifying Shafi'i Fiqh."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح منهجية والأحكام الرئيسية لمدرسة الفقه الشافعي. ركز على المنهج المنظم لمصادر التشريع (القرآن، السنة، الإجماع، القياس) كما نظمها الإمام الشافعي. قدم شروحًا للأحكام بناءً على هذه المنهجية. ركز على توضيح الفقه الشافعي. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الفقه الشافعي، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-fiqh-hanbali',
-                    name: 'Representative of Hanbali Fiqh',
+                    name: 'ممثل عن الفقه الحنبلي',
                     types: ['religion-islam', 'sect-sunni', 'school-fiqh'],
                     categories: ['fiqh-hanbali'],
-                    instruction: "You are an AI roleplaying as a representative explaining the methodology and key rulings (Ahkam) of the Hanbali school of Islamic jurisprudence (Fiqh). Focus on their emphasis on the Sunnah and sayings of companions, alongside Quran and Ijma, and their relatively strict approach. Provide explanations of rulings based on this methodology. Focus on clarifying Hanbali Fiqh."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح منهجية والأحكام الرئيسية لمدرسة الفقه الحنبلي. ركز على تأكيدها على السنة وأقوال الصحابة، إلى جانب القرآن والإجماع، ونهجها المتشدد نسبيًا. قدم شروحًا للأحكام بناءً على هذه المنهجية. ركز على توضيح الفقه الحنبلي. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الفقه الحنبلي، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-fiqh-zahiri',
-                    name: 'Representative of Zahiri Fiqh',
+                    name: 'ممثل عن الفقه الظاهري',
                     types: ['religion-islam', 'school-fiqh'], // Zahiri has theological aspects too, but often discussed for Fiqh method
                     categories: ['fiqh-zahiri'],
-                    instruction: "You are an AI roleplaying as a representative explaining the methodology and key rulings (Ahkam) of the Zahiri school of Islamic thought. Focus on their strict adherence to the apparent (`dhahir`) meaning of the Quran and Sunnah and rejection of Qiyas (analogical reasoning) and Istihsan (juristic preference) in Fiqh. Provide explanations of rulings based on this literalist methodology. Focus on clarifying Zahiri Fiqh."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح منهجية والأحكام الرئيسية للمدرسة الظاهرية للفكر الإسلامي. ركز على التزامها الصارم بالمعنى الظاهر للقرآن والسنة ورفض القياس والاستحسان في الفقه. قدم شروحًا للأحكام بناءً على هذه المنهجية الحرفية. ركز على توضيح الفقه الظاهري. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الفقه الظاهري، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-fiqh-jafari',
-                    name: 'Representative of Ja\'fari Fiqh',
+                    name: 'ممثل عن الفقه الجعفري',
                     types: ['religion-islam', 'sect-shia', 'school-fiqh'],
                     categories: ['fiqh-jafari'],
-                    instruction: "You are an AI roleplaying as a representative explaining the methodology and key rulings (Ahkam) of the Ja'fari school of Islamic jurisprudence, the primary Fiqh school within Twelver Shia Islam. Focus on sources of law which include the Quran, Sunnah (as narrated through Shia sources), Ijma, and Aql (intellect/reasoning). Provide explanations of rulings based on this methodology. Focus on clarifying Ja'fari Fiqh."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح منهجية والأحكام الرئيسية لمدرسة الفقه الجعفري، وهي المدرسة الفقهية الأساسية في الإسلام الشيعي الإثني عشري. ركز على مصادر التشريع التي تشمل القرآن، السنة (كما رواها الشيعة)، الإجماع، والعقل. قدم شروحًا للأحكام بناءً على هذه المنهجية. ركز على توضيح الفقه الجعفري. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الفقه الجعفري، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
 
 
                 // --- Islamic Representatives (Broader Sects/Movements) ---
                 {
                     key: 'representative-islam-sunni-general', // General Sunni rep
-                    name: 'Representative of Sunni Islam (General)',
+                    name: 'ممثل عن الإسلام السني (عام)',
                     types: ['religion-islam', 'sect-sunni'],
                     categories: ['general'], // General category
-                    instruction: "You are an AI roleplaying as a representative who explains the core beliefs and general practices of Sunni Islam, encompassing its mainstream theological and legal traditions. Base your explanations on the Quran, Sunnah (Prophetic traditions accepted by Sunnis), and the consensus of classical Sunni scholarship. Explain concepts clearly and respectfully. Do not attempt to persuade, debate, or criticize other viewpoints or sects. Focus on clarifying general Sunni Islamic teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المعتقدات الأساسية والممارسات العامة للإسلام السني، شاملاً تقاليده اللاهوتية والفقهية السائدة. اعتمد في شروحك على القرآن والسنة (التقاليد النبوية التي يقبلها السنة) وإجماع العلماء السنة الكلاسيكيين. اشرح المفاهيم بوضوح واحترام. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر أو الطوائف الأخرى. ركز على توضيح التعاليم الإسلامية السنية العامة. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الإسلام السني، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-islam-shia-general', // General Shia rep
-                    name: 'Representative of Shia Islam (General)',
+                    name: 'ممثل عن الإسلام الشيعي (عام)',
                     types: ['religion-islam', 'sect-shia'],
                     categories: ['general'], // General category
-                    instruction: "You are an AI roleplaying as a representative who explains the core beliefs and general practices of Shia Islam, encompassing its major branches like Twelvers and Ismailis (without going into extreme detail on internal differences unless asked specifically about a known distinction, and always cautiously). Base your explanations on the Quran, Sunnah (as narrated through Shia sources), and the teachings of the Ahl al-Bayt and Shia Imams. Explain concepts clearly and respectfully. Do not attempt to persuade, debate, or criticize other viewpoints or sects. Focus on clarifying general Shia Islamic teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المعتقدات الأساسية والممارسات العامة للإسلام الشيعي، شاملاً فروعه الرئيسية مثل الإثني عشرية والإسماعيلية (دون الخوض في تفاصيل دقيقة عن الاختلافات الداخلية ما لم يُطلب منك ذلك خصيصًا بشأن تمييز معروف، وبحذر دائمًا). اعتمد في شروحك على القرآن والسنة (كما رواها الشيعة) وتعاليم أهل البيت والأئمة الشيعة. اشرح المفاهيم بوضوح واحترام. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر أو الطوائف الأخرى. ركز على توضيح التعاليم الإسلامية الشيعية العامة. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الإسلام الشيعي، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-islam-zaydi',
-                    name: 'Representative of Zaydi Shia Islam',
+                    name: 'ممثل عن الإسلام الشيعي الزيدي',
                     types: ['religion-islam', 'sect-shia'], // Specific Shia branch
                     categories: ['fiqh-zaydi'], // Has its own Fiqh
-                    instruction: "You are an AI roleplaying as a representative who explains the core beliefs and practices of Zaydi Shia Islam. Focus on the key differences and similarities compared to Twelver Shia and Sunni Islam, particularly their views on the Imamate (limiting it to descendants of Fatimah who lead rebellions) and their unique Fiqh methodology (closer to Sunni Hanafi in some ways). Explain concepts clearly and respectfully. Do not attempt to persuade, debate, or criticize other viewpoints or sects. Focus on clarifying Zaydi Shia teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المعتقدات والممارسات الأساسية للإسلام الشيعي الزيدي. ركز على الاختلافات والتشابهات الرئيسية مقارنة بالإسلام الإثني عشري والسني، لا سيما آراؤهم حول الإمامة (التي تقتصر على سلالة فاطمة الذين يقودون الثورات) ومنهجيتهم الفقهية الفريدة (الأقرب إلى الفقه الحنفي في بعض النواحي). اشرح المفاهيم بوضوح واحترام. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر أو الطوائف الأخرى. ركز على توضيح التعاليم الشيعية الزيدية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الإسلام الزيدي، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-islam-ibadi',
-                    name: 'Representative of Ibadi Islam',
+                    name: 'ممثل عن الإسلام الإباضي',
                     types: ['religion-islam', 'sect-ibadi'], // Distinct sect
                     categories: [],
-                    instruction: "You are an AI roleplaying as a representative who explains the core beliefs and practices of Ibadi Islam, a distinct branch of Islam different from Sunni and Shia. Focus on their unique theological views (e.g., regarding the vision of God, the createdness of the Quran) and legal methodology. Explain concepts clearly and respectfully. Do not attempt to persuade, debate, or criticize other viewpoints or sects. Focus on clarifying Ibadi Islamic teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المعتقدات والممارسات الأساسية للإسلام الإباضي، وهو فرع متميز من الإسلام يختلف عن السنة والشيعة. ركز على آرائهم اللاهوتية الفريدة (مثل رؤية الله، خلق القرآن) ومنهجيتهم القانونية. اشرح المفاهيم بوضوح واحترام. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر أو الطوائف الأخرى. ركز على توضيح التعاليم الإسلامية الإباضية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الإسلام الإباضي، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
-                {
+                 {
                     key: 'representative-islam-sufism', // Already included, refined instruction
-                    name: 'Representative of Sufism',
+                    name: 'ممثل عن الصوفية',
                     types: ['religion-islam', 'movement-sufism'],
                     categories: [], // Specific orders could go here
-                    instruction: "You are an AI roleplaying as a representative who explains the concepts and practices associated with Sufism, the mystical dimension of Islam. Focus on topics like remembrance of God (Dhikr), purification of the heart, the spiritual path (Tariqa), the relationship with a spiritual guide (Shaykh), and love for the Divine. Explain concepts respectfully, drawing from the rich tradition of Sufi masters and texts. Do not attempt to persuade, debate, or criticize other viewpoints within or outside Islam. Focus on clarifying Sufi teachings and experiences."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المفاهيم والممارسات المرتبطة بالصوفية، البعد الروحي أو الباطني في الإسلام. ركز على مواضيع مثل ذكر الله، تزكية النفس، السلوك (الطريق)، العلاقة بالمرشد الروحي (الشيخ)، ومحبة الإله. اشرح المفاهيم باحترام، مع الاستفادة من التراث الغني لأساتذة الصوفية ونصوصهم. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر داخل أو خارج الإسلام. ركز على توضيح التعاليم والتجارب الصوفية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الصوفية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-islam-quranist', // Already included, refined instruction
-                    name: 'Representative of Quranism',
+                    name: 'ممثل عن القرآنيين',
                     types: ['religion-islam', 'movement-quranist'],
                     categories: [],
-                    instruction: "You are an AI roleplaying as a representative who explains the perspective of Quranism (Ahl al-Quran), which emphasizes the Quran as the sole source of religious law and guidance, often questioning the authority or necessity of traditional Hadith collections for deriving religious law. Explain this viewpoint, its arguments for relying solely on the Quran, and its approach to understanding scripture respectfully. Do not argue, debate, or attempt to deconvert the user from other Islamic perspectives. Do not mock or criticize traditional Islamic practices based on Hadith. Focus on clarifying the Quranist perspective."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح منظور القرآنيين (أهل القرآن)، الذين يؤكدون على القرآن كمصدر وحيد للتشريع والهداية الدينية، وغالبًا ما يشككون في سلطة أو ضرورة مجموعات الأحاديث التقليدية لاستخلاص التشريع. اشرح وجهة النظر هذه، وحججهم في الاعتماد على القرآن وحده، ومنهجهم في فهم النص المقدس باحترام. لا تجادل، تناقش، أو تحاول تحويل المستخدم من وجهات نظر إسلامية أخرى. لا تسخر أو تنتقد الممارسات الإسلامية التقليدية المبنية على الحديث. ركز على توضيح منظور القرآنيين. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن وجهة نظر القرآنيين، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 // Add more specific Islamic groups if necessary and *if* their beliefs can be explained neutrally and safely.
                 // Avoid groups heavily associated with modern political/extremist ideologies.
@@ -1446,80 +1325,80 @@
                 // --- Christian Representatives ---
                 {
                     key: 'representative-christianity-general', // Already included, refined instruction
-                    name: 'Representative of Christianity (General)',
+                    name: 'ممثل عن المسيحية (عام)',
                     types: ['religion-christianity'],
                     categories: ['general'], // General category
-                    instruction: "You are an AI roleplaying as a representative who explains the core beliefs and general practices of Christianity, encompassing its major historical traditions and doctrines (e.g., Trinity, Incarnation, Atonement, Resurrection, the role of the Bible). Explain concepts clearly, respectfully, and based on widely accepted Christian scriptures and doctrines. Do not attempt to persuade, debate, or criticize other viewpoints or religions. Focus on clarifying general Christian teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المعتقدات الأساسية والممارسات العامة للمسيحية، شاملاً تقاليدها وعقائدها التاريخية الرئيسية (مثل الثالوث، التجسد، الكفارة، القيامة، دور الكتاب المقدس). اشرح المفاهيم بوضوح واحترام، واستنادًا إلى الكتب المقدسة المسيحية والعقائد المقبولة على نطاق واسع. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر أو الأديان الأخرى. ركز على توضيح التعاليم المسيحية العامة. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن المسيحية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-christianity-orthodox', // Already included, refined instruction
-                    name: 'Representative of Orthodox Christianity',
+                    name: 'ممثل عن المسيحية الأرثوذكسية',
                     types: ['religion-christianity', 'denomination-orthodox'],
                     categories: [],
-                    instruction: "You are an AI roleplaying as a representative who explains the core beliefs and practices of Orthodox Christianity (Eastern Orthodoxy, Oriental Orthodoxy). Base your explanations on Holy Scripture and Holy Tradition (including the teachings of the Ecumenical Councils and Church Fathers). Focus on concepts like theosis, veneration of icons, the sacraments as mysteries, and the structure of the Orthodox Church. Explain concepts clearly and respectfully. Do not attempt to persuade, debate, or criticize other viewpoints or denominations. Focus on clarifying Orthodox Christian teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المعتقدات والممارسات الأساسية للمسيحية الأرثوذكسية (الشرقية والأرثوذكسية المشرقية). اعتمد في شروحك على الكتاب المقدس المقدس والتقليد المقدس (بما في ذلك المجامع المسكونية وآباء الكنيسة). ركز على مفاهيم مثل التأله، تبجيل الأيقونات، الأسرار كألغاز، وهيكل الكنيسة الأرثوذكسية. اشرح المفاهيم بوضوح واحترام. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر أو الطوائف الأخرى. ركز على توضيح التعاليم المسيحية الأرثوذكسية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن المسيحية الأرثوذكسية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-christianity-catholic', // Already included, refined instruction
-                    name: 'Representative of Catholic Christianity',
+                    name: 'ممثل عن المسيحية الكاثوليكية',
                     types: ['religion-christianity', 'denomination-catholic'],
                     categories: [],
-                    instruction: "You are an AI roleplaying as a representative who explains the core beliefs and practices of Catholic Christianity (Roman Catholicism). Base your explanations on the Bible, the Catechism of the Catholic Church, and the teachings of the Magisterium (Pope and bishops). Focus on concepts like the sacraments, the role of the Church hierarchy, the communion of saints, Mary, and Catholic social teaching. Explain concepts clearly and respectfully. Do not attempt to persuade, debate, or criticize other viewpoints or denominations. Focus on clarifying Catholic Christian teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المعتقدات والممارسات الأساسية للمسيحية الكاثوليكية (الرومانية الكاثوليكية). اعتمد في شروحك على الكتاب المقدس وتعاليم الكنيسة الكاثوليكية (بما في ذلك التقليد، المجامع، الرسائل البابوية). ركز على مفاهيم مثل الأسرار، دور التسلسل الهرمي للكنيسة، شركة القديسين، مريم العذراء، والتعليم الاجتماعي الكاثوليكي. اشرح المفاهيم بوضوح واحترام. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر أو الطوائف الأخرى. ركز على توضيح التعاليم الكاثوليكية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن المسيحية الكاثوليكية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-christianity-protestant', // Already included, refined instruction
-                    name: 'Representative of Protestant Christianity (General)',
+                    name: 'ممثل عن المسيحية البروتستانتية (عام)',
                     types: ['religion-christianity', 'denomination-protestant'],
                     categories: ['general'], // General category
-                    instruction: "You are an AI roleplaying as a representative who explains the core beliefs and general practices of Protestant Christianity. Base your explanations on the Bible, emphasizing key Reformation principles like Sola Scriptura (Scripture alone), Sola Fide (faith alone), and Sola Gratia (grace alone). Explain concepts clearly and respectfully, acknowledging the diversity within Protestantism. Do not attempt to persuade, debate, or criticize other viewpoints or denominations. Focus on clarifying general Protestant Christian teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المعتقدات والممارسات الأساسية للمسيحية البروتستانتية. اعتمد في شروحك على الكتاب المقدس، مع التأكيد على المبادئ الرئيسية للإصلاح مثل سولا سكريبتورا (الكتاب المقدس وحده)، سولا فيديه (الإيمان وحده)، وسولا غراتيا (النعمة وحدها). اشرح المفاهيم بوضوح واحترام، مع الاعتراف بالتنوع داخل البروتستانتية. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر أو الطوائف الأخرى. ركز على توضيح التعاليم المسيحية البروتستانتية العامة. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن المسيحية البروتستانتية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 // Add more specific Protestant denominations if needed (e.g., Baptist, Methodist, Lutheran, Reformed)
 
 
                 // --- Other Belief Systems ---
-                // {
-                //     key: 'representative-druze', // Keep with caution as discussed
-                //     name: 'Representative of Druze Faith (Public Aspects)',
-                //     types: ['religion-druze'],
-                //     categories: ['public-aspects-only'], // Tag emphasizing the limitation
-                //     instruction: "You are an AI roleplaying as a representative who explains the publicly accessible and widely known aspects of the Druze faith, focusing on history, ethics, social practices, and the principle of Tawhid (Oneness of God). Be aware that many deeper aspects of Druze beliefs are esoteric and not shared with outsiders. You MUST NOT attempt to explain esoteric beliefs, rituals, or specific interpretations of scripture that are reserved for the initiated (`Uqqal`). Respond based only on widely available academic or public domain information about the Druze community and its history. Be respectful and maintain the principle of prudent concealment (`Taqiya`) when necessary by politely declining to discuss esoteric topics. Do NOT attempt to persuade or criticize other viewpoints. Focus on clarifying publicly known aspects of the Druze faith."
-                // },
+                 {
+                     key: 'representative-druze', // Keep with caution as discussed
+                     name: 'ممثل عن العقيدة الدرزية (الجوانب العامة)',
+                     types: ['religion-druze'],
+                     categories: ['public-aspects-only'], // Tag emphasizing the limitation
+                     instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح الجوانب العامة والمعروفة على نطاق واسع من العقيدة الدرزية، مع التركيز على التاريخ والأخلاق والممارسات الاجتماعية ومبدأ التوحيد. كن على دراية بأن العديد من الجوانب الأعمق للمعتقدات الدرزية باطنية ولا يتم مشاركتها مع الغرباء. يجب عليك **ألا** تحاول شرح المعتقدات الباطنية أو الطقوس أو التفسيرات المحددة للنصوص المقدسة التي هي مخصصة للمبادرين (العقّال). استجب بناءً على المعلومات الأكاديمية المتاحة على نطاق واسع أو المعلومات المتاحة للجمهور فقط حول المجتمع الدرزي وتاريخه، وليس العقيدة الداخلية. كن محترمًا والتزم بمبدأ الكتمان (التقية) عند الضرورة عن طريق الرفض بلباقة لمناقشة الموضوعات الباطنية. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر الأخرى. ركز على توضيح الجوانب المعروفة علنًا من العقيدة الدرزية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الجوانب العامة للعقيدة الدرزية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
+                 },
                 {
                     key: 'representative-judaism-general',
-                    name: 'Representative of Judaism (General)',
+                    name: 'ممثل عن اليهودية (عام)',
                     types: ['religion-judaism'],
                     categories: ['general'],
-                    instruction: "You are an AI roleplaying as a representative who explains the core beliefs and general practices of Judaism. Base your explanations on the Hebrew Bible (Tanakh), the Talmud, and traditional Jewish law (Halakha). Focus on concepts like the Covenant, the importance of Mitzvot (commandments), Jewish history, holidays, and life cycle events. Explain concepts clearly and respectfully. Do not attempt to persuade, debate, or criticize other viewpoints or religions. Focus on clarifying general Jewish teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المعتقدات والممارسات الأساسية لليهودية. اعتمد في شروحك على الكتاب المقدس العبري (التناخ)، التلمود، والشريعة اليهودية التقليدية (الهالاخاه). ركز على مفاهيم مثل العهد، أهمية الميتزفوت (الوصايا)، التاريخ اليهودي، الأعياد، ومراحل الحياة. اشرح المفاهيم بوضوح واحترام. لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر أو الأديان الأخرى. ركز على توضيح التعاليم اليهودية العامة. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن اليهودية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-buddhism-general',
-                    name: 'Representative of Buddhism (General)',
+                    name: 'ممثل عن البوذية (عام)',
                     types: ['religion-buddhism'],
                     categories: ['general'],
-                    instruction: "You are an AI roleplaying as a representative who explains the core beliefs and general practices of Buddhism. Focus on concepts like the Four Noble Truths, the Eightfold Path, Karma, Rebirth, Nirvana, and the role of meditation. Explain concepts clearly, respectfully, and based on the teachings of Siddhartha Gautama (the Buddha) and various Buddhist traditions (Theravada, Mahayana, etc., acknowledging diversity). Do not attempt to persuade, debate, or criticize other viewpoints or religions. Focus on clarifying general Buddhist teachings."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح المعتقدات والممارسات الأساسية للبوذية. ركز على مفاهيم مثل الحقائق النبيلة الأربع، المسار الثماني النبيل، الكارما، إعادة الميلاد، النيرفانا، ودور التأمل. اشرح المفاهيم بوضوح واحترام، واستنادًا إلى تعاليم Siddhartha Gautama (البوذا) والتقاليد البوذية المختلفة (ثيرفادا، ماهايانا، إلخ، مع الاعتراف بالتنوع). لا تحاول الإقناع أو الجدال أو انتقاد وجهات النظر أو الأديان الأخرى. ركز على توضيح التعاليم البوذية العامة. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن البوذية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 // Add other religions like Hinduism, Sikhism, etc., with similar cautious, explanation-focused instructions.
 
                 // --- Non-Religious Stances ---
                 {
                     key: 'representative-atheism', // Already included, refined instruction
-                    name: 'Representative of Atheism',
+                    name: 'ممثل عن الإلحاد',
                     types: ['philosophical-stance', 'stance-non-religious'],
                     categories: ['atheism'],
-                    instruction: "You are an AI roleplaying as a representative who explains the stance of atheism, which is the lack of belief in gods or deities. Explain the common reasoning and arguments associated with atheism (e.g., based on empirical evidence, logical problems with the concept of God, the problem of evil), and various atheist perspectives on morality, the universe, meaning, etc. Explain this viewpoint respectfully and based on common secular reasoning. Do not argue, debate, or attempt to deconvert the user. Do not mock, criticize, or disparage religious belief or believers. Focus on clarifying the atheist viewpoint and its intellectual basis."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح موقف الإلحاد، وهو عدم الإيمان بالآلهة أو الكيانات الإلهية. اشرح الأسباب والحجج الشائعة المرتبطة بالإلحاد (على سبيل المثال، بناءً على الأدلة التجريبية، المشكلات المنطقية في مفهوم الله، مشكلة الشر)، ووجهات النظر الملحدة المختلفة حول الأخلاق، الكون، المعنى، إلخ. اشرح وجهة النظر هذه باحترام واستنادًا إلى التفكير العلماني الشائع. لا تجادل، تناقش، أو تحاول تحويل المستخدم عن معتقداته. لا تسخر، تنتقد، أو تحقر المعتقد الديني أو المؤمنين. ركز على توضيح وجهة النظر الملحدة وأساسها الفكري. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الإلحاد، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-agnosticism', // Already included, refined instruction
-                    name: 'Representative of Agnosticism',
+                    name: 'ممثل عن اللاأدرية',
                     types: ['philosophical-stance', 'stance-non-religious'],
                     categories: ['agnosticism'],
-                    instruction: "You are an AI roleplaying as a representative who explains the stance of agnosticism, which is the view that the existence or non-existence of God or gods (or the ultimate nature of reality) is unknown or possibly unknowable. Explain the different forms of agnosticism (e.g., weak/strong, agnostic theism/atheism) and the philosophical reasoning behind it, often focusing on epistemology (the study of knowledge). Explain this viewpoint respectfully. Do not argue or debate. Do not mock, criticize, or disparage religious belief or atheism. Focus on clarifying the agnostic viewpoint."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح موقف اللاأدرية، وهو الرأي القائل بأن وجود الله أو الآلهة (أو الطبيعة المطلقة للواقع) غير معروف أو ربما لا يمكن معرفته. اشرح الأشكال المختلفة للاأدرية (مثل ضعيفة/قوية، لاأدرية ثيئية/ملحدة) والمنطق الفلسفي وراءها، وغالبًا ما تركز على نظرية المعرفة. اشرح وجهة النظر هذه باحترام. لا تجادل أو تناقش. لا تسخر، تنتقد، أو تحقر المعتقد الديني أو الإلحاد. ركز على توضيح وجهة النظر اللاأدرية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن اللاأدرية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 {
                     key: 'representative-secular-humanism',
-                    name: 'Representative of Secular Humanism',
+                    name: 'ممثل عن الإنسانية العلمانية',
                     types: ['philosophical-stance', 'stance-non-religious', 'movement-humanism'],
                     categories: ['secular-humanism'],
-                    instruction: "You are an AI roleplaying as a representative who explains the philosophy of Secular Humanism. Focus on its emphasis on reason, ethics, justice, and philosophical naturalism, while rejecting religious dogma and supernaturalism. Explain Humanist values and its approach to finding meaning and morality without reliance on divine authority. Explain this viewpoint respectfully. Do not argue, debate, or criticize religious belief. Focus on clarifying Secular Humanist principles."
+                    instruction: `أنت مساعد ذكاء اصطناعي تلعب دور ممثل يشرح فلسفة الإنسانية العلمانية. ركز على تأكيدها على العقل، الأخلاق، العدالة، والطبيعانية الفلسفية، مع رفض العقائد الدينية والغيبيات. اشرح القيم الإنسانية ونهجها في إيجاد المعنى والأخلاق دون الاعتماد على سلطة إلهية. اشرح وجهة النظر هذه باحترام. لا تجادل، تناقش، أو تنتقد المعتقد الديني. ركز على توضيح مبادئ الإنسانية العلمانية. إذا حاول المستخدم إقناعك بأنك مخطئ بشأن الإنسانية العلمانية، حاول مناقشته وإقناعه بأنك على صواب ولماذا.`
                 },
                 // Add other non-religious stances if appropriate and can be explained neutrally.
 
@@ -1578,13 +1457,15 @@
                 return status;
             };
 
-            // Function to announce text for screen readers
+            // Function to announce text for screen readers (Translated)
             let ariaStatusElement = null;
             const announce = (text) => {
                 if (!ariaStatusElement) {
                     ariaStatusElement = createAriaStatusElement();
                 }
+                // Clear previous message
                 ariaStatusElement.textContent = '';
+                // Announce new message after a small delay
                 setTimeout(() => {
                     ariaStatusElement.textContent = text;
                 }, 100);
@@ -1603,7 +1484,7 @@
                     localStorage.setItem(LOCAL_STORAGE_KEY_STATE, JSON.stringify(stateToSave));
                 } catch (e) {
                     console.error('Error saving general state to localStorage:', e);
-                    announce('Error saving preferences.');
+                    announce('حدث خطأ في حفظ التفضيلات.'); // Translated
                 }
             };
 
@@ -1620,7 +1501,7 @@
                     }
                 } catch (e) {
                     console.error('Error loading general state from localStorage:', e);
-                    announce('Error loading preferences.');
+                    announce('حدث خطأ في تحميل التفضيلات.'); // Translated
                     appState.selectedFilters = ['all']; // Fallback on error
                 }
             };
@@ -1633,7 +1514,7 @@
                     console.log(`Representatives saved to localStorage. Count: ${appState.allRepresentativesMutable.length}`);
                 } catch (e) {
                     console.error('Error saving representatives to localStorage:', e);
-                    announce('Error saving representatives.');
+                    announce('حدث خطأ في حفظ الممثلين.'); // Translated
                 }
             };
 
@@ -1649,11 +1530,11 @@
                             console.log(`Representatives loaded from localStorage. Count: ${appState.allRepresentativesMutable.length}`);
                             if (validRepresentatives.length !== savedRepresentatives.length) {
                                 console.warn(`Filtered out ${savedRepresentatives.length - validRepresentatives.length} invalid representatives during load.`);
-                                announce('Some invalid representatives were filtered out during load.');
+                                announce('تم استبعاد بعض الممثلين غير الصالحين أثناء التحميل.'); // Translated
                             }
                         } else {
                             console.warn('Saved representative data is not an array. Using default representatives.');
-                            announce('Error loading saved representatives. Using defaults.');
+                            announce('حدث خطأ في تحميل الممثلين المحفوظين. استخدام الافتراضيين.'); // Translated
                             appState.allRepresentativesMutable = [...defaultRepresentatives]; // Use a copy of defaults
                             saveRepresentatives(); // Save defaults back immediately
                         }
@@ -1664,7 +1545,7 @@
                     }
                 } catch (e) {
                     console.error('Error loading representatives from localStorage:', e);
-                    announce('Error loading representatives. Using defaults.');
+                    announce('حدث خطأ في تحميل الممثلين. استخدام الافتراضيين.'); // Translated
                     appState.allRepresentativesMutable = [...defaultRepresentatives]; // Fallback to defaults on error
                     saveRepresentatives(); // Attempt to overwrite corrupted storage with defaults
                 }
@@ -1685,7 +1566,7 @@
                         }
                     } catch (e) {
                         console.error('Error saving active chat state to sessionStorage:', e);
-                        announce('Error saving current chat.');
+                        announce('حدث خطأ في حفظ المحادثة الحالية.'); // Translated
                     }
                 } else {
                     // If no representative selected, ensure no chat state is saved
@@ -1715,7 +1596,7 @@
                             // Clear invalid session storage state
                             sessionStorage.removeItem(SESSION_STORAGE_KEY_ACTIVE_REPRESENTATIVE);
                             sessionStorage.removeItem(SESSION_STORAGE_KEY_HISTORY);
-                            announce('Could not load saved chat for a deleted representative.');
+                            announce('لم يتم تحميل المحادثة المحفوظة لممثل محذوف.'); // Translated
                             return false; // Indicate load failed (representative not found)
                         }
                     } else {
@@ -1724,7 +1605,7 @@
                     }
                 } catch (e) {
                     console.error('Error loading active chat state from sessionStorage:', e);
-                    announce('Error loading saved chat.');
+                    announce('حدث خطأ في تحميل المحادثة المحفوظة.'); // Translated
                     // Clear potentially corrupted session storage state
                     sessionStorage.removeItem(SESSION_STORAGE_KEY_ACTIVE_REPRESENTATIVE);
                     sessionStorage.removeItem(SESSION_STORAGE_KEY_HISTORY);
@@ -1740,7 +1621,7 @@
                     console.log('Theme saved:', theme);
                 } catch (e) {
                     console.error('Error saving theme to localStorage:', e);
-                    announce('Error saving theme preference.');
+                    announce('حدث خطأ في حفظ تفضيل الوضع الليلي/النهاري.'); // Translated
                 }
             };
 
@@ -1751,45 +1632,107 @@
                     return savedTheme;
                 } catch (e) {
                     console.error('Error loading theme from localStorage:', e);
-                    announce('Error loading theme preference.');
+                    announce('حدث خطأ في تحميل تفضيل الوضع الليلي/النهاري.'); // Translated
                     return null;
                 }
             };
 
 
-            // --- render.js (Updated for Representatives) ---
+            // --- render.js (Updated for Representatives - Translated Texts) ---
 
             // Function to create a single representative card element (for the main selection grid)
-            const createRepresentativeCard = (representative) => { // Renamed function
+            const createRepresentativeCard = (representative) => {
                 const card = document.createElement('button');
                 card.classList.add('representative-card'); // Updated class name
                 card.dataset.key = representative.key;
 
-                const allTags = [...(representative.types || []), ...(representative.categories || [])];
-                // Display tags nicely (e.g., "Religion: Islam", "Sect: Sunni")
+                 const allTags = [...(representative.types || []), ...(representative.categories || [])];
+                // Display tags nicely (e.g., "Religion: Islam", "Sect: Sunni") - Translate Prefixes
+                const tagTranslations = {
+                    'religion': 'الدين',
+                    'sect': 'المذهب',
+                    'denomination': 'الطائفة',
+                    'philosophical': 'فلسفي',
+                    'stance': 'موقف',
+                    'movement': 'حركة',
+                    'school': 'مدرسة',
+                    'theology': 'عقيدة',
+                    'fiqh': 'فقه',
+                    'historical': 'تاريخي',
+                    'public': 'عامة', // For public-aspects-only
+                    'aspects': 'جوانب', // For public-aspects-only
+                    'only': 'فقط', // For public-aspects-only
+                    'general': 'عام', // For general category
+                };
+
                 const tagsHtml = allTags.map(tag => {
                     const parts = tag.split('-');
+                    let translatedTag = tag; // Default to original tag
+
                     if (parts.length > 1) {
-                        const prefix = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
-                        const value = parts.slice(1).join(' ').replace(/\b\w/g, l => l.toUpperCase());
-                        return `<span class="tag">${prefix}: ${value}</span>`;
+                         const prefix = parts[0].toLowerCase();
+                         const valueParts = parts.slice(1).map(part => {
+                              // Attempt to translate common values or keep as is
+                              const commonValueTranslations = {
+                                'islam': 'الإسلام',
+                                'christianity': 'المسيحية',
+                                'judaism': 'اليهودية',
+                                'buddhism': 'البوذية',
+                                'hinduism': 'الهندوسية',
+                                'sunni': 'سني',
+                                'shia': 'شيعي',
+                                'ibadi': 'إباضي',
+                                'orthodox': 'أرثوذكسية',
+                                'catholic': 'كاثوليكية',
+                                'protestant': 'بروتستانتية',
+                                'atheism': 'إلحاد',
+                                'agnosticism': 'لاأدرية',
+                                'humanism': 'إنسانية',
+                                'sufism': 'صوفية',
+                                'quranist': 'قرآنيون',
+                                'ashari': 'أشعرية',
+                                'maturidi': 'ماتريدية',
+                                'mutazila': 'معتزلة',
+                                'hanafi': 'حنفي',
+                                'maliki': 'مالكي',
+                                'shafii': 'شافعي',
+                                'hanbali': 'حنبلي',
+                                'zahiri': 'ظاهري',
+                                'jafari': 'جعفري',
+                                'zaydi': 'زيدي',
+                                // Add more specific translations if needed
+                                'public': tagTranslations['public'],
+                                'aspects': tagTranslations['aspects'],
+                                'only': tagTranslations['only'],
+                                'general': tagTranslations['general'],
+                              };
+                              return commonValueTranslations[part] || part.charAt(0).toUpperCase() + part.slice(1); // Capitalize if not translated
+                         });
+
+                         const translatedPrefix = tagTranslations[prefix] || prefix.charAt(0).toUpperCase() + prefix.slice(1); // Capitalize if not translated
+                         translatedTag = `${translatedPrefix}: ${valueParts.join(' ')}`;
+
                     } else {
-                        return `<span class="tag">${tag.replace(/\b\w/g, l => l.toUpperCase())}</span>`;
+                         // Handle tags without prefix, e.g., 'general'
+                         translatedTag = tagTranslations[tag] || tag.charAt(0).toUpperCase() + tag.slice(1); // Capitalize if not translated
                     }
+
+                     return `<span class="tag">${translatedTag}</span>`;
+
                 }).join('');
 
 
                 card.innerHTML = `
                     <h3>${representative.name}</h3>
-                    ${allTags.length > 0 ? `<div class="representative-tags">${tagsHtml}</div>` : ''} <!-- Updated class -->
+                    ${allTags.length > 0 ? `<div class="representative-tags">${tagsHtml}</div>` : ''}
                 `;
                 return card;
             };
 
             // Function to render the grid of representative cards (for the main selection view)
-            const renderRepresentativeGrid = (representativesToDisplay) => { // Renamed function
-                if (representativeGridDiv) { // Updated ID
-                    representativeGridDiv.innerHTML = ''; // Updated ID
+            const renderRepresentativeGrid = (representativesToDisplay) => {
+                if (representativeGridDiv) {
+                    representativeGridDiv.innerHTML = '';
 
                     let statusElement = document.getElementById('grid-status');
                     if (!statusElement) {
@@ -1800,127 +1743,172 @@
                     if (representativesToDisplay.length === 0) {
                         const emptyMessage = document.createElement('p');
                         emptyMessage.classList.add('empty-grid-message');
-                        emptyMessage.textContent = 'No representatives match your criteria.'; // Updated text
-                        representativeGridDiv.appendChild(emptyMessage); // Updated ID
-                        statusElement.textContent = 'No representatives match your criteria.'; // Updated text
+                        emptyMessage.textContent = 'لا يوجد ممثلون يطابقون معاييرك.'; // Translated
+                        representativeGridDiv.appendChild(emptyMessage);
+                        statusElement.textContent = 'لا يوجد ممثلون يطابقون معاييرك.'; // Translated
 
                     } else {
                         const resultCount = representativesToDisplay.length;
-                        const announcement = resultCount === 1 ? '1 representative found.' : `${resultCount} representatives found.`; // Updated text
+                        const announcement = resultCount === 1 ? 'تم العثور على ممثل واحد.' : `تم العثور على ${resultCount} ممثلين.`; // Translated
                         statusElement.textContent = announcement;
 
                         representativesToDisplay.forEach(representative => {
-                            const card = createRepresentativeCard(representative); // Updated function call
-                            representativeGridDiv.appendChild(card); // Updated ID
+                            const card = createRepresentativeCard(representative);
+                            representativeGridDiv.appendChild(card);
                         });
                     }
                 }
             };
 
 
-            // --- Representative Management Rendering (Updated for Representatives) ---
+            // --- Representative Management Rendering (Updated for Representatives - Translated Texts) ---
 
             // Function to create a single representative item for the management list
-            const createManagementRepresentativeItem = (representative) => { // Renamed function
+            const createManagementRepresentativeItem = (representative) => {
                 const item = document.createElement('div');
-                item.classList.add('management-representative-item'); // Updated class name
+                item.classList.add('management-representative-item');
                 item.dataset.key = representative.key;
 
-                // Display types and categories nicely
-                const types = (representative.types || []).map(t => {
-                    const parts = t.trim().split('-');
-                    if (parts.length > 1) {
-                        const prefix = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
-                        const value = parts.slice(1).join(' ').replace(/\b\w/g, l => l.toUpperCase());
-                        return `${prefix}: ${value}`;
-                    }
-                    return t.trim().replace(/\b\w/g, l => l.toUpperCase());
-                }).filter(t => t.length > 0).join(', ');
+                // Display types and categories nicely (Translate Prefixes)
+                const tagTranslations = {
+                    'religion': 'الدين',
+                    'sect': 'المذهب',
+                    'denomination': 'الطائفة',
+                    'philosophical': 'فلسفي',
+                    'stance': 'موقف',
+                    'movement': 'حركة',
+                    'school': 'مدرسة',
+                     'theology': 'عقيدة',
+                    'fiqh': 'فقه',
+                    'historical': 'تاريخي',
+                    'public': 'عامة',
+                    'aspects': 'جوانب',
+                    'only': 'فقط',
+                    'general': 'عام',
+                };
 
-                const categories = (representative.categories || []).map(c => {
-                    const parts = c.trim().split('-');
-                    if (parts.length > 1) {
-                        const prefix = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
-                        const value = parts.slice(1).join(' ').replace(/\b\w/g, l => l.toUpperCase());
-                        return `${prefix}: ${value}`;
-                    }
-                    return c.trim().replace(/\b\w/g, l => l.toUpperCase());
-                }).filter(c => c.length > 0).join(', ');
+                 const commonValueTranslations = {
+                    'islam': 'الإسلام',
+                    'christianity': 'المسيحية',
+                    'judaism': 'اليهودية',
+                    'buddhism': 'البوذية',
+                    'hinduism': 'الهندوسية',
+                    'sunni': 'سني',
+                    'shia': 'شيعي',
+                    'ibadi': 'إباضي',
+                    'orthodox': 'أرثوذكسية',
+                    'catholic': 'كاثوليكية',
+                    'protestant': 'بروتستانتية',
+                    'atheism': 'إلحاد',
+                    'agnosticism': 'لاأدرية',
+                    'humanism': 'إنسانية',
+                    'sufism': 'صوفية',
+                    'quranist': 'قرآنيون',
+                    'ashari': 'أشعرية',
+                    'maturidi': 'ماتريدية',
+                    'mutazila': 'معتزلة',
+                    'hanafi': 'حنفي',
+                    'maliki': 'مالكي',
+                    'shafii': 'شافعي',
+                    'hanbali': 'حنبلية', // Corrected from Hanbali (Fiqh) to Hanbali (general, often used for Fiqh)
+                    'zahiri': 'ظاهرية', // Corrected from Zahiri to الظاهرية (Fiqh)
+                    'jafari': 'جعفرية', // Corrected from Jafari to الجعفرية (Fiqh)
+                    'zaydi': 'زيدية', // Corrected from Zaydi to الزيدية (Shia sect)
+                    // Add more specific translations if needed
+                 };
+
+
+                const formatTags = (tagArray) => {
+                    return (tagArray || []).map(t => {
+                        const parts = t.trim().split('-');
+                        if (parts.length > 1) {
+                            const prefix = parts[0].toLowerCase();
+                            const valueParts = parts.slice(1).map(part => commonValueTranslations[part] || part.charAt(0).toUpperCase() + part.slice(1));
+                             const translatedPrefix = tagTranslations[prefix] || prefix.charAt(0).toUpperCase() + prefix.slice(1);
+                             return `${translatedPrefix}: ${valueParts.join(' ')}`;
+                        }
+                         return tagTranslations[t] || commonValueTranslations[t] || t.trim().replace(/\b\w/g, l => l.toUpperCase());
+                    }).filter(t => t.length > 0).join(', ');
+                };
+
+
+                const types = formatTags(representative.types);
+                const categories = formatTags(representative.categories);
 
 
                 item.innerHTML = `
                     <h4>${representative.name}</h4>
-                    <p><strong>Key:</strong> ${representative.key}</p>
-                    ${types ? `<p><strong>Types:</strong> ${types}</p>` : ''}
-                    ${categories ? `<p><strong>Categories:</strong> ${categories}</p>` : ''}
+                    <p><strong>المفتاح:</strong> ${representative.key}</p> <!-- Translated -->
+                    ${types ? `<p><strong>الأنواع:</strong> ${types}</p>` : ''} <!-- Translated -->
+                    ${categories ? `<p><strong>الفئات:</strong> ${categories}</p>` : ''} <!-- Translated -->
                     <p class="instruction-preview">${representative.instruction.substring(0, 100)}${representative.instruction.length > 100 ? '...' : ''}</p>
                     <div class="item-actions">
-                        <button class="edit-representative-button" data-key="${representative.key}" aria-label="Edit ${representative.name}">Edit</button> <!-- Updated class -->
-                        <button class="delete-representative-button" data-key="${representative.key}" aria-label="Delete ${representative.name}">Delete</button> <!-- Updated class -->
+                        <button class="edit-representative-button" data-key="${representative.key}" aria-label="تعديل ${representative.name}">تعديل</button> <!-- Translated -->
+                        <button class="delete-representative-button" data-key="${representative.key}" aria-label="حذف ${representative.name}">حذف</button> <!-- Translated -->
                     </div>
                 `;
                 return item;
             };
 
             // Function to render the list of representatives in the management view
-            const renderRepresentativeManagementList = (representativesToDisplay) => { // Renamed function
-                if (representativeManagementList) { // Updated ID
-                    representativeManagementList.innerHTML = ''; // Updated ID
+            const renderRepresentativeManagementList = (representativesToDisplay) => {
+                if (representativeManagementList) {
+                    representativeManagementList.innerHTML = '';
 
                     if (representativesToDisplay.length === 0) {
                         const emptyMessage = document.createElement('p');
                         emptyMessage.classList.add('empty-list-message');
-                        emptyMessage.textContent = 'No representatives added yet.'; // Updated text
-                        representativeManagementList.appendChild(emptyMessage); // Updated ID
+                        emptyMessage.textContent = 'لم تتم إضافة ممثلين بعد.'; // Translated
+                        representativeManagementList.appendChild(emptyMessage);
                     } else {
                         representativesToDisplay.forEach(representative => {
-                            const item = createManagementRepresentativeItem(representative); // Updated function call
-                            representativeManagementList.appendChild(item); // Updated ID
+                            const item = createManagementRepresentativeItem(representative);
+                            representativeManagementList.appendChild(item);
                         });
                     }
                 }
             };
 
             // Function to show the representative form modal (for add/edit)
-            const showRepresentativeForm = (representative = null) => { // Renamed function
+            const showRepresentativeForm = (representative = null) => {
                 if (representativeFormModal && representativeForm && representativeFormTitle && formRepresentativeKey && formRepresentativeName && formRepresentativeInstruction && formRepresentativeTypes && formRepresentativeCategories) { // Updated IDs
                     if (representative) {
-                        representativeFormTitle.textContent = `Edit Representative: ${representative.name}`; // Updated text
-                        formRepresentativeKey.value = representative.key; // Updated ID
-                        formRepresentativeName.value = representative.name; // Updated ID
-                        formRepresentativeInstruction.value = representative.instruction; // Updated ID
-                        formRepresentativeTypes.value = (representative.types || []).join(', '); // Updated ID
-                        formRepresentativeCategories.value = (representative.categories || []).join(', '); // Updated ID
+                        representativeFormTitle.textContent = `تعديل الممثل: ${representative.name}`; // Translated text
+                        formRepresentativeKey.value = representative.key;
+                        formRepresentativeName.value = representative.name;
+                        formRepresentativeInstruction.value = representative.instruction;
+                        formRepresentativeTypes.value = (representative.types || []).join(', ');
+                        formRepresentativeCategories.value = (representative.categories || []).join(', ');
 
                     } else {
-                        representativeFormTitle.textContent = 'Add New Representative'; // Updated text
-                        formRepresentativeKey.value = ''; // Updated ID
-                        representativeForm.reset(); // Updated ID
+                        representativeFormTitle.textContent = 'إضافة ممثل جديد'; // Translated text
+                        formRepresentativeKey.value = '';
+                        representativeForm.reset();
                     }
 
-                    representativeFormModal.classList.remove('hidden'); // Updated ID
-                    representativeFormModal.setAttribute('aria-hidden', 'false'); // Updated ID
-                    formRepresentativeName.focus(); // Updated ID
+                    representativeFormModal.classList.remove('hidden');
+                    representativeFormModal.setAttribute('aria-hidden', 'false');
+                    formRepresentativeName.focus();
                 } else {
                     console.error("Failed to show representative form: Missing DOM elements."); // Updated text
-                    announce("Error displaying representative form."); // Updated text
+                    announce("خطأ في عرض نموذج الممثل."); // Translated
                 }
             };
 
             // Function to hide the representative form modal
-            const hideRepresentativeForm = () => { // Renamed function
-                if (representativeFormModal && representativeForm && formRepresentativeKey) { // Updated IDs
-                    representativeFormModal.classList.add('hidden'); // Updated ID
-                    representativeFormModal.setAttribute('aria-hidden', 'true'); // Updated ID
-                    representativeForm.reset(); // Updated ID
-                    formRepresentativeKey.value = ''; // Updated ID
+            const hideRepresentativeForm = () => {
+                if (representativeFormModal && representativeForm && formRepresentativeKey) {
+                    representativeFormModal.classList.add('hidden');
+                    representativeFormModal.setAttribute('aria-hidden', 'true');
+                    representativeForm.reset();
+                    formRepresentativeKey.value = '';
                 } else {
                     console.error("Failed to hide representative form: Missing DOM elements."); // Updated text
                 }
             };
 
 
-            // --- Chat Rendering (Minor Updates) ---
+            // --- Chat Rendering (Minor Updates - Translated Text) ---
 
             const displayUserMessage = (text) => {
                 if (chatbox) {
@@ -1939,7 +1927,7 @@
                     if (isTypingIndicator) {
                         messageElement.classList.add('typing');
                         messageElement.innerHTML = '<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>';
-                        messageElement.setAttribute('aria-label', 'AI is typing');
+                        messageElement.setAttribute('aria-label', 'الذكاء الاصطناعي يكتب...'); // Translated
                         messageElement.setAttribute('role', 'status');
                         messageElement.setAttribute('aria-live', 'polite');
                     } else {
@@ -1966,8 +1954,8 @@
                 if (chatbox && appState.selectedRepresentative) { // Updated state property
                     chatbox.innerHTML = '';
                     if (history.length === 0) {
-                        // Updated initial message
-                        displayBotMessage(`You are now discussing beliefs with the Representative of ${appState.selectedRepresentative.name}. Feel free to ask questions about their perspective.`, false);
+                        // Updated initial message (Translated)
+                        displayBotMessage(`أنت تتحدث الآن عن المعتقدات مع ممثل عن ${appState.selectedRepresentative.name}. لا تتردد في طرح أسئلة حول وجهة نظرهم.`, false);
                     } else {
                         history.forEach(message => {
                             if (message.role === 'user') {
@@ -2005,27 +1993,27 @@
 
                 if (theme === 'dark') {
                     body.classList.add('dark-mode');
-                    if (darkModeToggle) darkModeToggle.setAttribute('aria-label', 'Toggle Light Mode');
+                    if (darkModeToggle) darkModeToggle.setAttribute('aria-label', 'تبديل الوضع النهاري'); // Translated
                 } else {
                     body.classList.remove('dark-mode');
-                    if (darkModeToggle) darkModeToggle.setAttribute('aria-label', 'Toggle Dark Mode');
+                    if (darkModeToggle) darkModeToggle.setAttribute('aria-label', 'تبديل الوضع الليلي'); // Translated
                 }
             };
 
 
             // --- filtering.js (Updated for Representatives) ---
-            const filterAndRenderRepresentatives = () => { // Renamed function
-                if (appState.currentState !== 'representative-selection') { // Updated state name
-                    renderRepresentativeGrid([]); // Updated function call
+            const filterAndRenderRepresentatives = () => {
+                if (appState.currentState !== 'representative-selection') {
+                    renderRepresentativeGrid([]);
                     return;
                 }
 
-                const representativesToFilter = appState.allRepresentativesMutable; // Updated state property
+                const representativesToFilter = appState.allRepresentativesMutable;
 
                 const searchTerm = appState.currentSearchTerm.toLowerCase();
 
-                const filtered = representativesToFilter.filter(representative => { // Updated variable name
-                    const representativeTags = [...(representative.types || []), ...(representative.categories || [])]; // Updated property name
+                const filtered = representativesToFilter.filter(representative => {
+                    const representativeTags = [...(representative.types || []), ...(representative.categories || [])];
 
                     let passesFilter = false;
                     if (appState.selectedFilters.includes('all') || appState.selectedFilters.length === 0) {
@@ -2036,20 +2024,22 @@
                         });
                     }
 
-                    const searchTermMatch = representative.name.toLowerCase().includes(searchTerm) || representativeTags.some(tag => tag.toLowerCase().includes(searchTerm)); // Updated property name
+                    // Search term matches name (translated or not) or tags (english id)
+                    const searchTermMatch = representative.name.toLowerCase().includes(searchTerm) || representativeTags.some(tag => tag.toLowerCase().includes(searchTerm));
 
                     return passesFilter && searchTermMatch;
                 });
 
-                renderRepresentativeGrid(filtered); // Updated function call
+                renderRepresentativeGrid(filtered);
             };
 
             const handleFilterChange = (event) => {
-                if (appState.currentState !== 'representative-selection') { // Updated state name
-                    console.warn("Attempted to change filters while not on representative selection view."); // Updated text
-                    if (event.target && event.target.type === 'checkbox') {
-                        event.target.checked = !event.target.checked;
-                    }
+                 if (appState.currentState !== 'representative-selection') {
+                    console.warn("Attempted to change filters while not on representative selection view.");
+                     if (event.target && event.target.type === 'checkbox') {
+                         // Revert checkbox state if click occurred in the wrong view
+                         event.target.checked = !event.target.checked;
+                     }
                     return;
                 }
 
@@ -2075,49 +2065,53 @@
                                 });
                             }
                         } else {
+                            // If 'all' is unchecked, and it's the only filter, keep it checked
+                             if (appState.selectedFilters.length === 1 && appState.selectedFilters.includes('all')) {
+                                // Do nothing, keep 'all' checked
+                                if (event.target) event.target.checked = true; // Revert the click
+                                announce('لا يمكنك إلغاء تحديد "الكل" عندما لا توجد فلاتر أخرى مختارة.'); // Translated
+                                return;
+                             }
                             tempSelectedFilters = tempSelectedFilters.filter(val => val !== 'all');
-                            if (tempSelectedFilters.length === 0) {
-                                appState.selectedFilters = [];
-                            } else {
-                                appState.selectedFilters = tempSelectedFilters;
-                            }
-                            updateFilterCheckboxes();
                         }
                     } else { // Handling non-'all' checkboxes
-                        if (isChecked && appState.selectedFilters.includes('all')) {
-                            appState.selectedFilters = appState.selectedFilters.filter(val => val !== 'all');
-                            const allCheckbox = document.getElementById('filter-all');
-                            if (allCheckbox) allCheckbox.checked = false;
-                        }
-
-                        if (isChecked) {
-                            if (!appState.selectedFilters.includes(clickedValue)) {
-                                appState.selectedFilters.push(clickedValue);
-                            }
-                        } else {
-                            appState.selectedFilters = appState.selectedFilters.filter(val => val !== clickedValue);
-                        }
-
-                        if (appState.selectedFilters.length === 0 && clickedValue !== 'all' && !isChecked) {
-                            const allCheckbox = document.getElementById('filter-all');
-                            if (allCheckbox) allCheckbox.checked = true;
-                            appState.selectedFilters = ['all'];
-                        }
-
-                        updateFilterCheckboxes();
+                         if (isChecked) {
+                             // If a specific filter is checked, uncheck 'all' if it's currently selected
+                            if (appState.selectedFilters.includes('all')) {
+                                tempSelectedFilters = tempSelectedFilters.filter(val => val !== 'all');
+                                 const allCheckbox = document.getElementById('filter-all');
+                                if (allCheckbox) allCheckbox.checked = false;
+                             }
+                             if (!tempSelectedFilters.includes(clickedValue)) {
+                                 tempSelectedFilters.push(clickedValue);
+                             }
+                         } else {
+                             // If a specific filter is unchecked
+                            tempSelectedFilters = tempSelectedFilters.filter(val => val !== clickedValue);
+                             // If no other filters are selected after unchecking, automatically select 'all'
+                            if (tempSelectedFilters.length === 0) {
+                                 tempSelectedFilters = ['all'];
+                                 const allCheckbox = document.getElementById('filter-all');
+                                if (allCheckbox) allCheckbox.checked = true;
+                             }
+                         }
                     }
 
+                    appState.selectedFilters = tempSelectedFilters;
+                    updateFilterCheckboxes();
+
                     console.log("Selected filters:", appState.selectedFilters);
-                    filterAndRenderRepresentatives(); // Updated function call
+                    filterAndRenderRepresentatives();
 
                     const label = document.querySelector(`label[for="${event.target.id}"]`);
                     if (label) {
-                        announce(`Filter ${label.textContent} ${isChecked ? 'selected' : 'deselected'}.`);
+                        announce(`تم تحديد الفلتر ${label.textContent}: ${isChecked ? 'مفعل' : 'معطل'}.`); // Translated
                     }
 
                     saveState();
                 }
             };
+
 
             const handleSearchInput = (event) => {
                 if (appState.currentState !== 'representative-selection') { // Updated state name
@@ -2133,21 +2127,20 @@
             // --- representativeManagement.js (Updated for Representatives) ---
 
             const generateRepresentativeKey = (name) => { // Renamed function
-                const nameSlug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '').substring(0, 20);
-                const timestamp = Date.now();
+                // Use a basic slug from name, but ensure it's safe and unique enough
+                // Since names are now Arabic, a simple timestamp+random might be safer/easier
+                 const safeNamePart = name.replace(/\s+/g, '-').replace(/[^\u0600-\u06FFa-zA-Z0-9-]/g, '').substring(0, 20); // Allow Arabic letters
+                 const timestamp = Date.now();
                 const random = Math.random().toString(36).substring(2, 8);
-                const prefix = nameSlug || 'representative'; // Updated prefix
-                const safePrefix = prefix.replace(/^[^a-z]+/, '');
-                const finalPrefix = safePrefix || 'representative'; // Updated prefix
 
-                return `${finalPrefix}-${timestamp}-${random}`;
+                return `${safeNamePart || 'rep'}-${timestamp}-${random}`;
             };
 
-            const saveRepresentative = (formData) => { // Renamed function
+            const saveRepresentative = (formData) => {
                 const { key, name, instruction, types, categories } = formData;
 
                 if (!name || name.trim() === '' || !instruction || instruction.trim() === '') {
-                    announce('Name and Instruction are required.');
+                    announce('الاسم والتعليمات مطلوبان.'); // Translated
                     return false;
                 }
 
@@ -2156,85 +2149,85 @@
 
                 let representativeIndex = -1;
                 if (key && key !== '') {
-                    representativeIndex = appState.allRepresentativesMutable.findIndex(r => r.key === key); // Updated state property and variable name
+                    representativeIndex = appState.allRepresentativesMutable.findIndex(r => r.key === key);
                 }
 
                 if (representativeIndex > -1) {
-                    appState.allRepresentativesMutable[representativeIndex] = { // Updated state property
+                    appState.allRepresentativesMutable[representativeIndex] = {
                         key: key,
                         name: name.trim(),
                         instruction: instruction.trim(),
                         types: typesArray,
                         categories: categoriesArray
                     };
-                    console.log('Representative updated:', name); // Updated text
-                    announce(`Representative "${name.trim()}" updated.`); // Updated text
+                    console.log('Representative updated:', name);
+                    announce(`تم تحديث الممثل "${name.trim()}".`); // Translated
                 } else {
-                    const newRepresentative = { // Updated variable name
-                        key: generateRepresentativeKey(name.trim()), // Updated function call
+                    const newRepresentative = {
+                        key: generateRepresentativeKey(name.trim()),
                         name: name.trim(),
                         instruction: instruction.trim(),
                         types: typesArray,
                         categories: categoriesArray
                     };
-                    appState.allRepresentativesMutable.push(newRepresentative); // Updated state property and variable name
-                    console.log('Representative added:', name); // Updated text
-                    announce(`Representative "${name.trim()}" added.`); // Updated text
+                    appState.allRepresentativesMutable.push(newRepresentative);
+                    console.log('Representative added:', name);
+                    announce(`تمت إضافة الممثل "${name.trim()}".`); // Translated
                 }
 
-                saveRepresentatives(); // Updated function call
-                renderRepresentativeManagementList(appState.allRepresentativesMutable); // Updated function call and state property
-                filterAndRenderRepresentatives(); // Updated function call
+                saveRepresentatives();
+                renderRepresentativeManagementList(appState.allRepresentativesMutable);
+                filterAndRenderRepresentatives();
 
                 return true;
             };
 
-            const deleteRepresentative = (key) => { // Renamed function
+            const deleteRepresentative = (key) => {
                 if (!key || key.trim() === '') {
-                    console.error("No valid key provided for deletion."); // Updated text
-                    announce("Error: Could not delete representative."); // Updated text
+                    console.error("No valid key provided for deletion.");
+                    announce("خطأ: لم يتم حذف الممثل."); // Translated
                     return;
                 }
 
-                const representativeToDelete = appState.allRepresentativesMutable.find(r => r.key === key); // Updated state property and variable name
-                const representativeName = representativeToDelete ? representativeToDelete.name : 'Unknown'; // Updated variable name
+                const representativeToDelete = appState.allRepresentativesMutable.find(r => r.key === key);
+                const representativeName = representativeToDelete ? representativeToDelete.name : 'غير معروف'; // Translated
 
-                const initialCount = appState.allRepresentativesMutable.length; // Updated state property
-                appState.allRepresentativesMutable = appState.allRepresentativesMutable.filter(representative => representative.key !== key); // Updated state property and variable name
-                const newCount = appState.allRepresentativesMutable.length; // Updated state property
+                const initialCount = appState.allRepresentativesMutable.length;
+                appState.allRepresentativesMutable = appState.allRepresentativesMutable.filter(representative => representative.key !== key);
+                const newCount = appState.allRepresentativesMutable.length;
 
                 if (newCount < initialCount) {
-                    console.log('Representative deleted:', key); // Updated text
-                    announce(`Representative "${representativeName}" deleted.`); // Updated text
+                    console.log('Representative deleted:', key);
+                    announce(`تم حذف الممثل "${representativeName}".`); // Translated
 
-                    saveRepresentatives(); // Updated function call
+                    saveRepresentatives();
 
-                    if (appState.selectedRepresentative && appState.selectedRepresentative.key === key) { // Updated state property
-                        console.log(`Deleted active representative "${representativeName}". Clearing chat state and going back.`); // Updated text
-                        goBackToRepresentatives(); // Updated function call
+                    if (appState.selectedRepresentative && appState.selectedRepresentative.key === key) {
+                        console.log(`Deleted active representative "${representativeName}". Clearing chat state and going back.`);
+                        goBackToRepresentatives();
                     } else {
-                        renderRepresentativeManagementList(appState.allRepresentativesMutable); // Updated function call and state property
-                        filterAndRenderRepresentatives(); // Updated function call
+                        renderRepresentativeManagementList(appState.allRepresentativesMutable);
+                        filterAndRenderRepresentatives();
                     }
                 } else {
-                    console.warn('Representative not found for deletion:', key); // Updated text
-                    announce(`Representative "${representativeName}" not found.`); // Updated text
+                    console.warn('Representative not found for deletion:', key);
+                    announce(`الممثل "${representativeName}" غير موجود للحذف.`); // Translated
                 }
             };
 
-            const getRepresentativeByKey = (key) => { // Renamed function
+            const getRepresentativeByKey = (key) => {
                 if (!key || key.trim() === '') {
-                    console.error("No valid key provided for lookup."); // Updated text
+                    console.error("No valid key provided for lookup.");
                     return undefined;
                 }
-                return appState.allRepresentativesMutable.find(representative => representative.key === key); // Updated state property and variable name
+                return appState.allRepresentativesMutable.find(representative => representative.key === key);
             };
 
 
-            // --- api.js (Updated Instructions) ---
-            const sendMessageToAPI = async (representativeInstruction, history, message) => { // Updated parameter name
-                // Combine global, negative, and specific instructions
-                const finalInstruction = `${GLOBAL_INSTRUCTION}\n\n${representativeInstruction}\n\n${NEGATIVE_INSTRUCTION}`; // Updated variable names
+            // --- api.js (Instructions are now Arabic) ---
+            const sendMessageToAPI = async (representativeInstruction, history, message) => {
+                // Combine global, negative, and specific instructions (all in Arabic now)
+                const finalInstruction = `${GLOBAL_INSTRUCTION}\n\n${representativeInstruction}\n\n${NEGATIVE_INSTRUCTION}`; // All parts are Arabic strings
 
                 const contents = history.map(msg => ({
                     role: msg.role,
@@ -2250,7 +2243,7 @@
                 const apiRequestBody = {
                     contents: contents,
                     systemInstruction: {
-                        parts: [{ text: finalInstruction }] // Use the combined instruction
+                        parts: [{ text: finalInstruction }] // Use the combined instruction (Arabic)
                     },
                     generationConfig: {
                         temperature: 0.7, // Adjust temperature for desired creativity/faithfulness (lower might be better for factual explanation)
@@ -2278,11 +2271,11 @@
                 return apiData;
             };
 
-            // --- core.js (Updated for Representatives) ---
+            // --- core.js (Updated for Representatives - Translated Texts) ---
             const sendMessage = async () => {
                 const messageText = userInput.value.trim();
 
-                if (appState.currentState !== 'chat' || !messageText || !appState.selectedRepresentative || (userInput && userInput.disabled)) { // Updated state property
+                if (appState.currentState !== 'chat' || !messageText || !appState.selectedRepresentative || (userInput && userInput.disabled)) {
                     console.warn("Attempted to send message when not allowed.");
                     return;
                 }
@@ -2299,11 +2292,11 @@
 
                 let typingIndicator = null;
                 try {
-                    typingIndicator = displayBotMessage("...", true);
+                    typingIndicator = displayBotMessage("...", true); // This is a visual indicator, text is just "..."
                     scrollToBottom();
 
-                    // Pass the specific representative's instruction to the API call
-                    const apiData = await sendMessageToAPI(appState.selectedRepresentative.instruction, appState.conversationHistory, messageText); // Updated state property and function call
+                    // Pass the specific representative's instruction (now in Arabic) to the API call
+                    const apiData = await sendMessageToAPI(appState.selectedRepresentative.instruction, appState.conversationHistory, messageText);
 
                     if (typingIndicator && chatbox && typingIndicator.parentElement) {
                         chatbox.removeChild(typingIndicator);
@@ -2320,23 +2313,23 @@
                             }
                             saveActiveChatState(); // Save updated history
 
-                            // Provide a generic safety message
-                            botResponseText = `[${appState.selectedRepresentative.name}]: I am unable to respond to that query as it violates safety guidelines. Please ask about the beliefs or rephrase your question.`; // Updated text
+                            // Provide a generic safety message (Translated)
+                            botResponseText = `[مُمثّل ${appState.selectedRepresentative.name}]: لا أستطيع الرد على هذا الاستفسار لأنه ينتهك إرشادات السلامة. يرجى السؤال عن المعتقدات أو إعادة صياغة سؤالك.`;
                             displayBotMessage(botResponseText, false);
-                            announce("AI response blocked due to safety guidelines.");
+                            announce("تم حظر استجابة الذكاء الاصطناعي بسبب إرشادات السلامة."); // Translated
                         } else if (apiData.candidates[0].content && apiData.candidates[0].content.parts && apiData.candidates[0].content.parts[0] && apiData.candidates[0].content.parts[0].text) {
                             botResponseText = apiData.candidates[0].content.parts[0].text;
                             // Ensure the last history entry is the user message before pushing the model response
                             if (appState.conversationHistory.length > 0 && appState.conversationHistory[appState.conversationHistory.length - 1].role === 'user') {
                                 appState.conversationHistory.push({ role: 'model', parts: [{ text: botResponseText }] });
                                 displayBotMessage(botResponseText, false);
-                                announce(`${appState.selectedRepresentative.name} response: ${botResponseText.substring(0, Math.min(botResponseText.length, 100))}...`); // Updated text
+                                announce(`رد الممثل عن ${appState.selectedRepresentative.name}: ${botResponseText.substring(0, Math.min(botResponseText.length, 100))}...`); // Translated
                                 saveActiveChatState(); // Save updated history
 
                             } else {
                                 console.error("History state mismatch: Expected last message to be user before adding model response.");
-                                displayBotMessage('An internal error occurred processing the response history.', false);
-                                announce('An internal error occurred.');
+                                displayBotMessage('حدث خطأ داخلي أثناء معالجة سجل المحادثة.', false); // Translated
+                                announce('حدث خطأ داخلي.'); // Translated
                             }
 
                         } else {
@@ -2347,9 +2340,9 @@
                             }
                             saveActiveChatState(); // Save updated history
 
-                            botResponseText = 'Received an invalid or empty response from the AI.';
+                            botResponseText = 'تلقيت استجابة غير صالحة أو فارغة من الذكاء الاصطناعي.'; // Translated
                             displayBotMessage(botResponseText, false);
-                            announce('Received an invalid or empty response from the AI.');
+                            announce('تلقيت استجابة غير صالحة أو فارغة من الذكاء الاصطناعي.'); // Translated
                         }
                     } else {
                         console.error('Unexpected API response structure or empty candidates:', apiData);
@@ -2360,9 +2353,9 @@
                         saveActiveChatState(); // Save updated history
 
 
-                        botResponseText = 'Error: Could not get a valid response from the AI.';
+                        botResponseText = 'خطأ: لم يتم الحصول على استجابة صالحة من الذكاء الاصطناعي.'; // Translated
                         displayBotMessage(botResponseText, false);
-                        announce('Error: Could not get an valid response from the AI.');
+                        announce('خطأ: لم يتم الحصول على استجابة صالحة من الذكاء الاصطناعي.'); // Translated
                     }
 
                     scrollToBottom();
@@ -2379,9 +2372,9 @@
                     saveActiveChatState(); // Save updated history
 
 
-                    displayBotMessage(`Error: ${error.message || 'Failed to get AI response.'}`, false);
+                    displayBotMessage(`خطأ: ${error.message || 'فشل الحصول على استجابة من الذكاء الاصطناعي.'}`, false); // Translated
                     scrollToBottom();
-                    announce(`Error: ${error.message || 'Failed to get AI response.'}`);
+                    announce(`خطأ: ${error.message || 'فشل الحصول على استجابة من الذكاء الاصطناعي.'}`); // Translated
 
                 } finally {
                     const isApiKeyValid = GOOGLE_API_KEY !== '' && GOOGLE_API_KEY.length >= 20 && !GOOGLE_API_KEY.startsWith('YOUR');
@@ -2398,9 +2391,9 @@
                 }
             };
 
-            // --- viewManager.js (Updated for Representatives) ---
+            // --- viewManager.js (Updated for Representatives - Translated Texts) ---
             const showView = (viewName) => {
-                const validViews = ['representative-selection', 'chat', 'representative-management']; // Updated view names
+                const validViews = ['representative-selection', 'chat', 'representative-management'];
                 if (!validViews.includes(viewName)) {
                     console.error(`Invalid view name: ${viewName}. Must be one of ${validViews.join(', ')}.`);
                     return;
@@ -2413,8 +2406,8 @@
                 viewsInsideMain.forEach(view => {
                     let targetViewElement = null;
                     if (viewName === 'chat') targetViewElement = chatContainerDiv;
-                    else if (viewName === 'representative-selection') targetViewElement = representativeSelectionDiv; // Updated ID
-                    else if (viewName === 'representative-management') targetViewElement = representativeManagementDiv; // Updated ID
+                    else if (viewName === 'representative-selection') targetViewElement = representativeSelectionDiv;
+                    else if (viewName === 'representative-management') targetViewElement = representativeManagementDiv;
 
                     if (view === targetViewElement) {
                         view.classList.remove('hidden');
@@ -2425,17 +2418,17 @@
                     }
                 });
 
-                if (viewName === 'representative-selection') { // Updated state name
+                if (viewName === 'representative-selection') {
                     if (userInput) userInput.disabled = true;
                     if (sendButton) sendButton.disabled = true;
                     if (chatbox) chatbox.innerHTML = '';
-                    appState.selectedRepresentative = null; // Updated state property
+                    appState.selectedRepresentative = null;
                     appState.conversationHistory = [];
 
-                    filterAndRenderRepresentatives(); // Updated function call
+                    filterAndRenderRepresentatives();
 
                     setTimeout(() => {
-                        const representativeSearchInput = document.getElementById('representative-search'); // Updated ID
+                        const representativeSearchInput = document.getElementById('representative-search');
                         if (representativeSearchInput) representativeSearchInput.focus();
                     }, 100);
 
@@ -2451,87 +2444,93 @@
                         console.warn("Chat input disabled due to missing/invalid API key.");
                         if (userInput) userInput.disabled = true;
                         if (sendButton) sendButton.disabled = true; // Ensure send button is also disabled
-                        if (chatbox && chatbox.children.length === 0) {
-                            displayBotMessage("API Key is not configured. Chat functionality is disabled.", false);
+                         if (chatbox && chatbox.children.length <= 1) { // Only show if not already showing initial API key error message
+                             // Check if the last message is NOT the API key error
+                             const lastMessage = chatbox.lastElementChild;
+                             const isAlreadyShowingError = lastMessage && lastMessage.classList.contains('bot-message') && lastMessage.textContent.includes('API Key');
+
+                             if (!isAlreadyShowingError) {
+                                displayBotMessage("مفتاح API غير مُعدّ. وظيفة الدردشة معطلة.", false); // Translated
+                             }
                         }
                     }
                     scrollToBottom();
 
-                } else if (viewName === 'representative-management') { // Updated state name
-                    renderRepresentativeManagementList(appState.allRepresentativesMutable); // Updated function call and state property
+                } else if (viewName === 'representative-management') {
+                    renderRepresentativeManagementList(appState.allRepresentativesMutable);
 
                     if (userInput) userInput.disabled = true;
                     if (sendButton) sendButton.disabled = true;
                     if (chatbox) chatbox.innerHTML = '';
-                    appState.selectedRepresentative = null; // Updated state property
+                    appState.selectedRepresentative = null;
                     appState.conversationHistory = [];
 
                     setTimeout(() => {
-                        const addRepresentativeButton = document.getElementById('add-representative-button'); // Updated ID
+                        const addRepresentativeButton = document.getElementById('add-representative-button');
                         if (addRepresentativeButton) addRepresentativeButton.focus();
                     }, 100);
                 }
             };
 
-            const startChat = (representative) => { // Updated parameter name
-                if (appState.currentState !== 'representative-selection') { // Updated state name
-                    console.warn("Attempted to select representative while not on selection view."); // Updated text
+            const startChat = (representative) => {
+                if (appState.currentState !== 'representative-selection') {
+                    console.warn("Attempted to select representative while not on selection view.");
                     return;
                 }
 
-                if (!representative) { // Updated parameter name
-                    console.error("No representative provided to startChat."); // Updated text
+                if (!representative) {
+                    console.error("No representative provided to startChat.");
                     return;
                 }
 
                 saveActiveChatState(); // Save state before switching
 
-                appState.selectedRepresentative = representative; // Updated state property
+                appState.selectedRepresentative = representative;
                 appState.conversationHistory = []; // Start new chat history
 
                 saveActiveChatState(); // Save new empty chat state
 
-                if (currentRepresentativeSpan) currentRepresentativeSpan.textContent = representative.name; // Updated ID and property
+                if (currentRepresentativeSpan) currentRepresentativeSpan.textContent = representative.name;
 
                 showView('chat');
 
-                announce(`Chat started with Representative of ${representative.name}.`); // Updated text
+                announce(`بدأت المحادثة مع ممثل عن ${representative.name}.`); // Translated
             };
 
-            const goBackToRepresentatives = () => { // Renamed function
-                if (appState.currentState === 'representative-selection') { // Updated state name
-                    console.warn("Already on representative selection view."); // Updated text
+            const goBackToRepresentatives = () => {
+                if (appState.currentState === 'representative-selection') {
+                    console.warn("Already on representative selection view.");
                     return;
                 }
 
                 saveActiveChatState(); // Save chat state before leaving
 
-                showView('representative-selection'); // Updated view name
+                showView('representative-selection');
 
-                announce('Returned to representative selection.'); // Updated text
+                announce('عادت إلى شاشة اختيار الممثلين.'); // Translated
             };
 
-            const showRepresentativeManagementView = () => { // Renamed function
-                if (appState.currentState !== 'representative-selection') { // Updated state name
-                    console.warn("Attempted to go to management while not on selection view."); // Updated text
+            const showRepresentativeManagementView = () => {
+                if (appState.currentState !== 'representative-selection') {
+                    console.warn("Attempted to go to management while not on selection view.");
                     return;
                 }
 
                 saveActiveChatState(); // Save chat state before leaving
 
-                showView('representative-management'); // Updated view name
+                showView('representative-management');
 
-                announce('Showing representative management.'); // Updated text
+                announce('عرض شاشة إدارة الممثلين.'); // Translated
             }
 
             const clearChatHistory = () => {
                 if (appState.currentState !== 'chat') {
                     console.warn("Attempted to clear chat history while not in chat view.");
-                    announce("Cannot clear chat history now.");
+                    announce("لا يمكن مسح سجل المحادثة الآن."); // Translated
                     return;
                 }
 
-                if (!appState.selectedRepresentative) return; // Updated state property
+                if (!appState.selectedRepresentative) return;
 
                 appState.conversationHistory = [];
                 saveActiveChatState();
@@ -2545,76 +2544,76 @@
                     userInput.focus();
                 }
 
-                announce('Chat history cleared.');
+                announce('تم مسح سجل المحادثة.'); // Translated
             };
 
 
-            // --- representativeManagementUi.js (Updated for Representatives) ---
+            // --- representativeManagementUi.js (Updated for Representatives - Translated Texts) ---
 
-            const setupRepresentativeManagementListeners = () => { // Renamed function
-                if (addRepresentativeButton) { // Updated ID
-                    addRepresentativeButton.addEventListener('click', () => { // Updated ID
-                        showRepresentativeForm(); // Updated function call
+            const setupRepresentativeManagementListeners = () => {
+                if (addRepresentativeButton) {
+                    addRepresentativeButton.addEventListener('click', () => {
+                        showRepresentativeForm();
                     });
                 }
 
-                if (backFromManagementButton) { // Updated ID
-                    backFromManagementButton.addEventListener('click', () => { // Updated ID
-                        goBackToRepresentatives(); // Updated function call
+                if (backFromManagementButton) {
+                    backFromManagementButton.addEventListener('click', () => {
+                        goBackToRepresentatives();
                     });
                 }
 
-                if (representativeManagementList) { // Updated ID
-                    representativeManagementList.addEventListener('click', (event) => { // Updated ID
-                        const editButton = event.target.closest('.edit-representative-button'); // Updated class
-                        const deleteButton = event.target.closest('.delete-representative-button'); // Updated class
+                if (representativeManagementList) {
+                    representativeManagementList.addEventListener('click', (event) => {
+                        const editButton = event.target.closest('.edit-representative-button');
+                        const deleteButton = event.target.closest('.delete-representative-button');
 
                         if (editButton) {
                             const key = editButton.dataset.key;
-                            const representativeToEdit = getRepresentativeByKey(key); // Updated function call
+                            const representativeToEdit = getRepresentativeByKey(key);
                             if (representativeToEdit) {
-                                showRepresentativeForm(representativeToEdit); // Updated function call
+                                showRepresentativeForm(representativeToEdit);
                             } else {
-                                announce(`Error: Representative with key ${key} not found.`); // Updated text
+                                announce(`خطأ: الممثل بالمفتاح ${key} غير موجود.`); // Translated
                             }
                         } else if (deleteButton) {
                             const key = deleteButton.dataset.key;
-                            if (confirm('Are you sure you want to delete this representative?')) { // Updated text
-                                deleteRepresentative(key); // Updated function call
+                            if (confirm('هل أنت متأكد أنك تريد حذف هذا الممثل؟')) { // Translated confirm prompt
+                                deleteRepresentative(key);
                             }
                         }
                     });
                 }
 
-                if (representativeForm) { // Updated ID
-                    representativeForm.addEventListener('submit', (event) => { // Updated ID
+                if (representativeForm) {
+                    representativeForm.addEventListener('submit', (event) => {
                         event.preventDefault();
 
                         const formData = {
-                            key: formRepresentativeKey ? formRepresentativeKey.value : '', // Updated ID
-                            name: formRepresentativeName ? formRepresentativeName.value.trim() : '', // Updated ID
-                            instruction: formRepresentativeInstruction ? formRepresentativeInstruction.value.trim() : '', // Updated ID
-                            types: formRepresentativeTypes ? formRepresentativeTypes.value.trim() : '', // Updated ID
-                            categories: formRepresentativeCategories ? formRepresentativeCategories.value.trim() : '' // Updated ID
+                            key: formRepresentativeKey ? formRepresentativeKey.value : '',
+                            name: formRepresentativeName ? formRepresentativeName.value.trim() : '',
+                            instruction: formRepresentativeInstruction ? formRepresentativeInstruction.value.trim() : '',
+                            types: formRepresentativeTypes ? formRepresentativeTypes.value.trim() : '',
+                            categories: formRepresentativeCategories ? formRepresentativeCategories.value.trim() : ''
                         };
 
-                        const success = saveRepresentative(formData); // Updated function call
+                        const success = saveRepresentative(formData);
 
                         if (success) {
-                            hideRepresentativeForm(); // Updated function call
+                            hideRepresentativeForm();
                         }
                     });
                 }
 
                 if (cancelFormButton) {
-                    cancelFormButton.addEventListener('click', hideRepresentativeForm); // Updated function call
+                    cancelFormButton.addEventListener('click', hideRepresentativeForm);
                 }
 
-                if (representativeFormModal) { // Updated ID
-                    representativeFormModal.addEventListener('click', (event) => { // Updated ID
+                if (representativeFormModal) {
+                    representativeFormModal.addEventListener('click', (event) => {
                         // Close modal if clicking outside the modal content
-                        if (event.target === representativeFormModal) { // Updated ID
-                            hideRepresentativeForm(); // Updated function call
+                        if (event.target === representativeFormModal) {
+                            hideRepresentativeForm();
                         }
                     });
                 }
@@ -2631,7 +2630,7 @@
             applyTheme(savedTheme || 'light');
 
             // Load representatives from storage (or defaults)
-            loadRepresentatives(); // Updated function call
+            loadRepresentatives();
 
             // Load other general state (filters)
             loadState();
@@ -2644,12 +2643,12 @@
 
             if (chatLoaded) {
                 // Set the correct representative name in the header if a chat was loaded
-                if (appState.selectedRepresentative && currentRepresentativeSpan) { // Updated state property and ID
-                    currentRepresentativeSpan.textContent = appState.selectedRepresentative.name; // Updated state property
+                if (appState.selectedRepresentative && currentRepresentativeSpan) {
+                    currentRepresentativeSpan.textContent = appState.selectedRepresentative.name;
                 }
                 showView('chat');
             } else {
-                showView('representative-selection'); // Updated view name
+                showView('representative-selection');
             }
 
 
@@ -2662,33 +2661,33 @@
                     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                     applyTheme(newTheme);
                     saveTheme(newTheme);
-                    announce(`Theme switched to ${newTheme} mode.`);
+                     announce(`تم تبديل الوضع إلى ${newTheme === 'dark' ? 'الليلي' : 'النهاري'}.`); // Translated
                 });
             }
 
-            // Representative Filtering & Search Listeners (Updated IDs)
-            const filterOptionsDiv = document.querySelector('#representative-filters .filter-options'); // Updated ID
+            // Representative Filtering & Search Listeners
+            const filterOptionsDiv = document.querySelector('#representative-filters .filter-options');
             if (filterOptionsDiv) {
                 filterOptionsDiv.addEventListener('change', handleFilterChange);
             }
-            if (representativeSearchInput) representativeSearchInput.addEventListener('input', handleSearchInput); // Updated ID
+            if (representativeSearchInput) representativeSearchInput.addEventListener('input', handleSearchInput);
 
-            // Representative Card Click Listener (using delegation on the grid - Updated IDs/Classes)
-            if (representativeGridDiv) { // Updated ID
-                representativeGridDiv.addEventListener('click', (event) => { // Updated ID
-                    if (appState.currentState !== 'representative-selection') { // Updated state name
-                        console.warn("Attempted to select representative while not on selection view."); // Updated text
+            // Representative Card Click Listener (using delegation on the grid)
+            if (representativeGridDiv) {
+                representativeGridDiv.addEventListener('click', (event) => {
+                    if (appState.currentState !== 'representative-selection') {
+                        console.warn("Attempted to select representative while not on selection view.");
                         return;
                     }
-                    const clickedCard = event.target.closest('.representative-card'); // Updated class
+                    const clickedCard = event.target.closest('.representative-card');
                     if (clickedCard && !clickedCard.disabled) {
                         const representativeKey = clickedCard.dataset.key;
-                        const representativeObject = appState.allRepresentativesMutable.find(r => r.key === representativeKey); // Updated state property and variable name
+                        const representativeObject = appState.allRepresentativesMutable.find(r => r.key === representativeKey);
                         if (representativeObject) {
-                            startChat(representativeObject); // Updated function call
+                            startChat(representativeObject);
                         } else {
-                            console.warn(`Clicked representative with key ${representativeKey} not found in mutable list.`); // Updated text
-                            announce(`Selected representative not found.`); // Updated text
+                            console.warn(`Clicked representative with key ${representativeKey} not found in mutable list.`);
+                             announce(`الممثل المحدد غير موجود.`); // Translated
                         }
                     }
                 });
@@ -2713,24 +2712,24 @@
             }
 
 
-            // Chat Header Button Listeners (Updated IDs)
+            // Chat Header Button Listeners
 
-            if (backToRepresentativesButton) { // Updated ID
-                backToRepresentativesButton.addEventListener('click', goBackToRepresentatives); // Updated function call
+            if (backToRepresentativesButton) {
+                backToRepresentativesButton.addEventListener('click', goBackToRepresentatives);
             }
             if (clearChatButton) {
                 clearChatButton.addEventListener('click', clearChatHistory);
             }
 
-            // Representative Management Button Listener (Updated ID)
-            if (manageRepresentativesButton) { // Updated ID
-                manageRepresentativesButton.addEventListener('click', showRepresentativeManagementView); // Updated function call
+            // Representative Management Button Listener
+            if (manageRepresentativesButton) {
+                manageRepresentativesButton.addEventListener('click', showRepresentativeManagementView);
             }
 
             // Setup Listeners specific to the Representative Management View and Form
-            setupRepresentativeManagementListeners(); // Updated function call
+            setupRepresentativeManagementListeners();
         });
     </script>
 </body>
 
-</html>
+</html> 
